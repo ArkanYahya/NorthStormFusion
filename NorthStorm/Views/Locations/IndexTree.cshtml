@@ -1,0 +1,112 @@
+﻿@model IEnumerable<NorthStorm.Models.Assistants.Location>
+
+    @using NorthStorm.Models.ViewModels;
+
+@{
+    string pageTitle = "المواقع الجغرافية";
+    ViewData["Title"] = pageTitle + " / " + "شجرة المواقع";
+    SortModel sortModel = (SortModel)ViewData["sortModel"];
+    PagerModel pager = ViewBag.Pager;
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p>
+    <a asp-action="Index" class="d-flex justify-content-end h5">
+        عودة
+    </a>
+</p>
+
+<div class="tree">
+    <ul>
+        @foreach (var node in Model)
+        {
+            <li>
+                @Html.Partial("_TreeNodePartial", node)
+            </li>
+        }
+    </ul>
+</div>
+
+<style>
+    .tree ul {
+        direction: rtl;
+        list-style-type: none;
+        padding-right: 1em;
+        position: relative;
+    }
+
+        .tree ul ul {
+            direction: rtl;
+            margin-right: 1em;
+            position: relative;
+        }
+
+            .tree ul ul:before {
+                direction: rtl;
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -1em;
+                bottom: 0;
+                border-right: 1px solid #333;
+            }
+
+    .tree li {
+        direction: rtl;
+        margin: 0;
+        padding: 0 0.5em;
+        line-height: 2em;
+        color: #369;
+        font-weight: 700;
+        position: relative;
+    }
+
+        .tree li:before {
+            direction: rtl;
+            content: '';
+            position: absolute;
+            top: 1em;
+            right: -1em;
+            width: 1em;
+            height: 0;
+            border-top: 1px solid #333;
+        }
+
+        .tree li a {
+            direction: rtl;
+            text-decoration: none;
+            color: #369;
+        }
+
+        .tree li button {
+            direction: rtl;
+            border: none;
+            background: none;
+            cursor: pointer;
+            margin-left: 5px;
+            padding: 0;
+            font-size: 1em;
+            color: #369;
+        }
+</style>
+
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var togglers = document.querySelectorAll('.tree button[data-bs-toggle="collapse"]');
+            togglers.forEach(function (toggler) {
+                toggler.addEventListener('click', function () {
+                    var target = document.getElementById(this.getAttribute('data-bs-target').substring(1));
+                    if (target.classList.contains('show')) {
+                        target.classList.remove('show');
+                    } else {
+                        //target.classList.add('show');
+                    }
+                });
+            });
+        });
+    </script>
+}

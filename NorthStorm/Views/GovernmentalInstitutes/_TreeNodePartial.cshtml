@@ -1,0 +1,24 @@
+﻿@model NorthStorm.Models.Assistants.GovernmentalInstitute
+
+
+@if (Model.ChildGovernmentalInstitutes != null && Model.ChildGovernmentalInstitutes.Count > 0)
+{
+    <button data-bs-toggle="collapse" data-bs-target="#node-@Model.Id"
+            aria-expanded="false" aria-controls="node-@Model.Id">
+        &#x25C0; <!-- Right-pointing triangle -->
+    </button>
+}
+<a>@Model.Name</a>
+@if (Model.ChildGovernmentalInstitutes != null && Model.ChildGovernmentalInstitutes.Count > 0)
+{
+    <div class="collapse" id="node-@Model.Id">
+        <ul>
+            @foreach (var child in Model.ChildGovernmentalInstitutes)
+            {
+                <li>
+                    @Html.Partial("_TreeNodePartial", child)
+                </li>
+            }
+        </ul>
+    </div>
+}

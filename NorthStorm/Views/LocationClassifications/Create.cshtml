@@ -1,0 +1,63 @@
+﻿@model NorthStorm.Models.Classifications.LocationClassification
+
+@{
+    string pageTitle = "تصنيفات الموقع الجغرافي";
+    ViewData["Title"] = pageTitle + " / " + "إنشاء قيد";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<form asp-action="Create">
+
+    <div class="card bg-light mb-3">
+        <div class="card-header">بيانات القيد</div>
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row col-md-12">
+                <div class="form-group col-md-0">
+                    <input type="hidden" asp-for="Id" />
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="KirkukSymbol" class="control-label"></label>
+                    <input asp-for="KirkukSymbol" class="form-control" />
+                    <span asp-validation-for="KirkukSymbol" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="BaghdadSymbol" class="control-label"></label>
+                    <input asp-for="BaghdadSymbol" class="form-control" />
+                    <span asp-validation-for="BaghdadSymbol" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <br />
+
+        </div>
+    </div>
+
+    <div class="row col-md-12">
+        <div class="form-group col-md-2">
+            <a asp-action="Index">إلغاء</a>
+        </div>
+        <div class="form-group col-md-8">
+        </div>
+        <div class="form-group col-md-2">
+            <input type="submit" value="حفظ" class="btn btn-primary w-100" />
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+}

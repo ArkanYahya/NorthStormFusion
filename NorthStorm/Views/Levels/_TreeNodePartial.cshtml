@@ -1,0 +1,72 @@
+﻿@model NorthStorm.Models.Assistants.Level
+
+<a href="#">@Model.Name</a>
+@if (Model.ChildLevels != null && Model.ChildLevels.Count > 0)
+{
+    <ul>
+        @foreach (var child in Model.ChildLevels)
+        {
+            <li>
+                @if (child != null)
+                {
+@*                     <span class="collapsible" onclick="toggleCollapse(this)"></span>
+ *@                    <a class="collapsible" onclick="toggleCollapse(this)" href="#">@child.Name</a>
+                    <div style="display:none;">
+                        @Html.Partial("_TreeNodePartial", child)
+                    </div>
+                }
+@*                 else
+                {
+                    <a href="#">@child.Name</a>
+                } *@
+@*                 <span class="collapsible" onclick="toggleCollapse(this)">@child.Name</span>
+                <div style="display:none;">
+                    @Html.Partial("_TreeNodePartial", child)
+                </div> *@
+            </li>
+        }
+    </ul>
+}
+
+<script>
+    function toggleCollapse(element) {
+        var nextElement = element.nextElementSibling;
+        if (nextElement.style.display === "none") {
+            nextElement.style.display = "block";
+            element.classList.add("expanded");
+        } else {
+            nextElement.style.display = "none";
+            element.classList.remove("expanded");
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var collapsibles = document.getElementsByClassName("collapsible");
+        for (var i = 0; i < collapsibles.length; i++) {
+            collapsibles[i].addEventListener("click", function () {
+                toggleCollapse(this);
+            });
+        }
+    });
+</script>
+
+@* @model List<NorthStorm.Models.Assistants.Level>
+
+<ul>
+    @foreach (var node in Model)
+    {
+        <li>
+            @if (node.ChildLevels != null && node.ChildLevels.Any())
+            {
+                <span class="collapsible" onclick="toggleCollapse(this)">@node.Name</span>
+                <div style="display:none;">
+                    @Html.Partial("_TreeNodePartial", node.ChildLevels.ToList())
+                </div>
+            }
+            else
+            {
+                <a href="#">@node.Name</a>
+            }
+        </li>
+    }
+</ul> *@

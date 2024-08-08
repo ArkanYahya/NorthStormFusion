@@ -1,0 +1,14 @@
+﻿@model NorthStorm.Models.JobTitle
+
+<li>
+    @Model.Name
+    @if (Model.ChildJobTitles != null && Model.ChildJobTitles.Any())
+    {
+        <ul>
+            @foreach (var childJobTitle in Model.ChildJobTitles)
+            {
+                @Html.Partial("_JobTitleTree", childJobTitle)
+            }
+        </ul>
+    }
+</li>

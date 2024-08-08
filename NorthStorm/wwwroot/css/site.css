@@ -1,0 +1,100 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+/********* main menu css code **************/
+.dropdown:hover > .dropdown-menu, .dropend:hover > .dropdown-menu {
+    display: block;
+    margin-top: .0em;
+}
+
+@media screen and (min-width:769px) {
+    .dropend:hover > .dropdown-menu {
+        position: absolute;
+        top: 0;
+        right: 100%;
+        margin-right: 0;
+        color: black;
+    }
+}
+
+
+.nav-link:hover {
+    color: white !important;
+    background-color: royalblue !important;
+}
+
+/********* main menu css code **************/
+
+
+/**************  new css styles ************/
+
+.CodesTable table {
+    width: 100%
+}
+
+.CodesTable thead {
+    width: calc(100%-1em);
+}
+
+.CodesTable tbody {
+    display: block;
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+    .CodesTable thead, .CodesTable tbody tr {
+        display: table;
+        width: 98%;
+        table-layout: fixed;
+    }
+
+.CodesTable thead, .CodesTable tbody, .CodesTable td {
+    border: none !important;
+}
+
+.EmpTotal {
+    background-image: none;
+}
+
+.QtyTotal {
+    background-image: none;
+}
+
+.FobTotal {
+    background-image: none;
+}
+
+.PriceTotal {
+    background-image: none;
+}
+
+.AmountTotal {
+    background-image: none;
+}
+
+* {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    font-style: normal;
+}

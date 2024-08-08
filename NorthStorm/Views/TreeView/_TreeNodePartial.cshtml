@@ -1,0 +1,16 @@
+﻿@model NorthStorm.Models.Assistants.TreeNode
+
+<a href="#" data-bs-toggle="collapse" data-bs-target="#node-@Model.Id">@Model.Name</a>
+@if (Model.Children != null && Model.Children.Count > 0)
+{
+    <div class="collapse" id="node-@Model.Id">
+        <ul>
+            @foreach (var child in Model.Children)
+            {
+                <li>
+                    @Html.Partial("_TreeNodePartial", child)
+                </li>
+            }
+        </ul>
+    </div>
+}

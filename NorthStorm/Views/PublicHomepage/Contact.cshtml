@@ -1,0 +1,96 @@
+﻿@{
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+    ViewData["Title"] = "NorthStorm ERP - تواصل معنا";
+}
+
+<main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title dark-background">
+        <div class="container d-lg-flex justify-content-between align-items-center">
+            <h1 class="mb-2 mb-lg-0">تواصل معنا</h1>
+            <nav class="breadcrumbs">
+                <ol>
+                    <li><a href="~/">الرئيسية</a></li>
+                    <li class="current">تواصل معنا</li>
+                </ol>
+            </nav>
+        </div>
+    </div><!-- End Page Title -->
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+        <div class="mb-5">
+            <iframe style="width: 100%; height: 400px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1624.4203411406852!2d44.37136392189064!3d35.483485456436206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1554d6772221f4f7%3A0x3109fa2beeda9e1f!2zTm9ydGggT2lsIENvbXBhbnkgaGVhZHF1YXJ0ZXIg2LPbldix24baqdin24zbldiq24wg2qnbhtmF2b7Yp9mG24zYp9uMINmG25XZiNiq24wg2KjYp9qp2YjZiNix!5e0!3m2!1sen!2siq!4v1721391000541!5m2!1sen!2siq" frameborder="0" allowfullscreen=""></iframe>
+        </div><!-- End Google Maps -->
+
+        <div class="container" data-aos="fade">
+
+            <div class="row gy-5 gx-lg-5">
+
+                <div class="col-lg-4">
+
+                    <div class="info">
+                        <h3>تواصل معنا</h3>
+                        <p>يمكنك التواصل معنا عن طريق احدى الطرق التالية.</p>
+
+                        <div class="info-item d-flex">
+                            <i class="bi bi-geo-alt flex-shrink-0"></i>
+                            <div>
+                                <h4>الموقع:</h4>
+                                <p> شركة نفط الشمال، عرفة، كركوك،العراق</p>
+                            </div>
+                        </div><!-- End Info Item -->
+
+                        <div class="info-item d-flex">
+                            <i class="bi bi-envelope flex-shrink-0"></i>
+                            <div>
+                                <h4>البريد الالكتروني:</h4>
+                                <p>info@northstorm.com</p>
+                            </div>
+                        </div><!-- End Info Item -->
+
+                        <div class="info-item d-flex">
+                            <i class="bi bi-phone flex-shrink-0"></i>
+                            <div>
+                                <h4>هاتف:</h4>
+                                <p dir="ltr">+964 50 250 000</p>
+                            </div>
+                        </div><!-- End Info Item -->
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-8">
+                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <input type="text" name="name" class="form-control" id="name" placeholder="الاسم الثلاثي" required="">
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="البريد الالكتروني" required="">
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <input type="text" class="form-control" name="subject" id="subject" placeholder="الموضوع" required="">
+                        </div>
+                        <div class="form-group mt-3">
+                            <textarea class="form-control" name="message" placeholder="الرسالة" required=""></textarea>
+                        </div>
+                        <div class="my-3">
+                            <div class="loading">تحميل</div>
+                            <div class="error-message"></div>
+                            <div class="sent-message">تم ارسال الرسالة بنجاح. شكرا لك!</div>
+                        </div>
+                        <div class="text-center"><button type="submit">إرسال</button></div>
+                    </form>
+                </div><!-- End Contact Form -->
+
+            </div>
+
+        </div>
+
+    </section><!-- /Contact Section -->
+
+</main>

@@ -1,0 +1,14 @@
+﻿@model NorthStorm.Models.Assistants.Location
+
+<li>
+    @Model.Name
+    @if (Model.ChildLocations != null && Model.ChildLocations.Any())
+    {
+        <ul>
+            @foreach (var childLocation in Model.ChildLocations)
+            {
+                @Html.Partial("_LocationTree", childLocation)
+            }
+        </ul>
+    }
+</li>

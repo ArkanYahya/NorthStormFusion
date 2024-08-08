@@ -1,0 +1,14 @@
+﻿@model NorthStorm.Models.Assistants.Level
+
+<a href="#">@Model.Name</a>
+@if (Model.ChildLevels != null && Model.ChildLevels.Count > 0)
+{
+    <ul>
+        @foreach (var child in Model.ChildLevels)
+        {
+            <li>
+                @Html.Partial("_TreeNodePartial", child)
+            </li>
+        }
+    </ul>
+}

@@ -1,0 +1,225 @@
+﻿@model NorthStorm.ViewModels.RecruitmentVM
+
+@{
+    Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+    ViewData["Title"] = "الموظفين";
+    ICollection<Employee> emp = ViewBag.emps;// (List<Employee>) ViewData["EmployeeWithourRecrutiment"];
+}
+
+<h1>إضافة موظف</h1>
+
+<h4></h4>
+<hr />
+<p dir="ltr">
+    <br />
+</p>
+
+<form asp-action="CreateView">
+    <div class="card bg-light mb-3">
+        <div class="card-header">بيانات القيد</div>
+        <div class="card-body">
+            <div class="row col-md-12">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group col-md-4">
+                    <label asp-for="ReferenceNo" class="control-label"></label>
+                    <input asp-for="ReferenceNo" class="form-control" readonly />
+                    <span asp-validation-for="ReferenceNo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="ReferenceDate" class="control-label"></label>
+                    <input asp-for="ReferenceDate" class="form-control" readonly />
+                    <span asp-validation-for="ReferenceDate" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="Subject" class="control-label"></label>
+                    <input asp-for="Subject" class="form-control" readonly />
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2 align-self-end text-md-center">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <br />
+        </div>
+    </div>
+
+    <div class="card bg-light mb-3">
+        <div class="card-header">المعلومات الرئيسية</div>
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row col-md-12">
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.Id" class="control-label"></label>
+                    <input asp-for="Employee.Id" class="form-control" />
+                    <span asp-validation-for="Employee.Id" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.FirstName" class="control-label"></label>
+                    <input asp-for="Employee.FirstName" class="form-control" id="FirstName" onchange="calculate()" oninput="calculate()" />
+                    <span asp-validation-for="Employee.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.MiddleName" class="control-label"></label>
+                    <input asp-for="Employee.MiddleName" class="form-control" id="MiddleName" />
+                    <span asp-validation-for="Employee.MiddleName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.LastName" class="control-label"></label>
+                    <input asp-for="Employee.LastName" class="form-control"/>
+                    <span asp-validation-for="Employee.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.FourthName" class="control-label"></label>
+                    <input asp-for="Employee.FourthName" class="form-control"/>
+                    <span asp-validation-for="Employee.FourthName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.SurName" class="control-label"></label>
+                    <input asp-for="Employee.SurName" class="form-control"/>
+                    <span asp-validation-for="Employee.SurName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.MotherFirstName" class="control-label"></label>
+                    <input asp-for="Employee.MotherFirstName" class="form-control" />
+                    <span asp-validation-for="Employee.MotherFirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.MotherMiddleName" class="control-label"></label>
+                    <input asp-for="Employee.MotherMiddleName" class="form-control"/>
+                    <span asp-validation-for="Employee.MotherMiddleName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.MotherLastName" class="control-label"></label>
+                    <input asp-for="Employee.MotherLastName" class="form-control"/>
+                    <span asp-validation-for="Employee.MotherLastName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.BirthDate" class="control-label"></label>
+                    <input asp-for="Employee.BirthDate" class="form-control"/>
+                    <span asp-validation-for="Employee.BirthDate" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.gender" class="control-label"></label>
+                    <select asp-for="Employee.GenderId" class="form-control" asp-items="ViewBag.GenderId">
+                        <option value="">-- إختر الجنس --</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.religion" class="control-label"></label>
+                    <select asp-for="Employee.ReligionId" class="form-control" asp-items="ViewBag.ReligionId">
+                        <option value="">-- إختر الديانة --</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.race" class="control-label"></label>
+                    <select asp-for="Employee.RaceId" class="form-control" asp-items="ViewBag.RaceId">
+                        <option value="">-- إختر القومية --</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.nationality" class="control-label"></label>
+                    <select asp-for="Employee.NationalityId" class="form-control" asp-items="ViewBag.NationalityId">
+                        <option value="">-- إختر الجنسية --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.CivilNumber" class="control-label"></label>
+                    <input asp-for="Employee.CivilNumber" class="form-control"/>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.IBAN" class="control-label"></label>
+                    <input asp-for="Employee.IBAN" class="form-control"/>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Employee.status" class="control-label"></label>
+                    <select asp-for="Employee.StatusId" class="form-control" asp-items="ViewBag.StatusId">
+                        <option value="">-- إختر الحالة --</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2 align-self-end text-md-end">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <br />
+        </div>
+    </div>
+
+    <div class="card bg-light mb-3">
+        <div class="card-header">المعلومات الوظيفية</div>
+        <div class="table card-body">
+            <div class="row col-md-12">
+                <div class="form-group col-md-2">
+                    <label asp-for="JobTitleId" class="control-label"></label>
+                    <select asp-for="JobTitleId" class="form-control" asp-items="ViewBag.JobTitles">
+                        <option value="">-- إختر العنوان الوظيفي --</option>
+                    </select>
+                </div>
+                @*                 <div class="form-group col-md-2">
+                <label asp-for="Employee.Level" class="control-label"></label>
+                <select asp-for="Employee.LevelId" class="form-control" asp-items="ViewBag.LevelId">
+                <option value="">-- إختر موقع العمل الهرمي --</option>
+                </select>
+                </div> *@
+
+            </div>
+
+        </div>
+        <div class="card-footer" style="height:50px"></div>
+    </div>
+
+    <div>
+        <div class="row col-md-12">
+            <div class="form-group col-md-2">
+                <a asp-action="Index">إلغاء</a>
+            </div>
+            <div class="form-group col-md-8">
+            </div>
+            <div class="form-group col-md-2 align-self-end text-md-end">
+                <input type="submit" value="حفظ" class="btn btn-primary w-100" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+        <script>
+            function calculate() {
+                var firstname = document.getElementById('FirstName').value;
+                console.log("FirstName:", firstname);
+
+                // Example of condition and setting value
+                if (firstname === 'اركان') {
+                    console.log("inside if");
+
+                    document.getElementById('MiddleName').value = 'يحيى';
+                } else {
+                    document.getElementById('MiddleName').value = ''; // Clear the field if the condition is not met
+                }
+            }
+        </script>
+    }
+}
+

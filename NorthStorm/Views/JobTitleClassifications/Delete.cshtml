@@ -1,0 +1,52 @@
+﻿@model NorthStorm.Models.Classifications.JobTitleClassification
+
+@{
+    string pageTitle = "تصنيفات العنوان الوظيفي";
+    ViewData["Title"] = pageTitle + " / " + "حذف قيد";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<hr />
+<p>
+    <div class="text-danger h4">
+        <h4 class="text-danger">هل أنت متأكد من حذف القيد؟</h4>
+    </div>
+</p>
+<div class="card bg-light mb-3">
+    <div class="card-header">بيانات القيد</div>
+    <div class="card-body">
+        <div class="row col-md-12">
+            <div class="form-group col-md-2">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Name)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.Name)" readonly/>
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">@Html.DisplayNameFor(model => model.KirkukSymbol)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.KirkukSymbol)" readonly />
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">@Html.DisplayNameFor(model => model.BaghdadSymbol)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.BaghdadSymbol)" readonly />
+            </div>
+            <div class="form-group col-md-6">
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <br />
+
+    </div>
+</div>
+
+<div class="row col-md-12">
+    <div class="form-group col-md-2">
+        <a asp-action="Index">إلغاء</a>
+    </div>
+    <div class="form-group col-md-8">
+    </div>
+    <form asp-action="Delete" class="form-group col-md-2">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="حذف" class="btn btn-danger w-100" />
+    </form>
+</div>

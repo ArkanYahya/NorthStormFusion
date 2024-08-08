@@ -1,0 +1,14 @@
+﻿@model NorthStorm.Models.Assistants.Level
+
+<li>
+    @Model.Name
+    @if (Model.ChildLevels != null && Model.ChildLevels.Any())
+    {
+        <ul>
+            @foreach (var childLevel in Model.ChildLevels)
+            {
+                @Html.Partial("_LevelTree", childLevel)
+            }
+        </ul>
+    }
+</li>

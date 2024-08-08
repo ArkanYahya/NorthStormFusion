@@ -1,0 +1,138 @@
+﻿@model IEnumerable<NorthStorm.Models.Assistants.Level>
+
+    @using NorthStorm.Models.ViewModels;
+
+@{
+    string pageTitle = "الهيكل التنظيمي";
+    ViewData["Title"] = pageTitle;
+    SortModel sortModel = (SortModel)ViewData["sortModel"];
+    PagerModel pager = ViewBag.Pager;
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<div class="row col-md-12">
+    <div class="form-group col-8 ">
+    </div>
+    <div class="form-group col-2 ">
+        <a asp-action="IndexTree" class="d-flex justify-content-end h5">
+            شجرة العناوين
+        </a>
+    </div>
+    <div class="form-group col-2 ">
+        <a asp-action="Create" class="d-flex justify-content-end h5">
+            إنشاء قيد
+        </a>
+    </div>
+</div>
+<div class="card bg-light mb-3">
+    <div class="card-header">
+        <partial name="_topBar" model="@pager" />
+    </div>
+
+    <table class="table card-body">
+        <thead>
+            <tr>
+                <th>
+                    <i class="@sortModel.GetColumn("Id").SortIcon" arial-hidden="true"></i>
+                    <a asp-action="Index"
+                       asp-route-sortExpression="@sortModel.GetColumn("Id").SortExpression"
+                       asp-route-pg="@pager.CurrentPage"
+                       asp-route-pageSize="@pager.PageSize"
+                       asp-route-SearchText="@ViewData["SearchText"]">
+                        @Html.DisplayNameFor(model => model.Id)
+                    </a>
+                </th>
+                <th>
+                    <i class="@sortModel.GetColumn("Name").SortIcon" arial-hidden="true"></i>
+                    <a asp-action="Index"
+                       asp-route-sortExpression="@sortModel.GetColumn("Name").SortExpression"
+                       asp-route-pg="@pager.CurrentPage"
+                       asp-route-pageSize="@pager.PageSize"
+                       asp-route-SearchText="@ViewData["SearchText"]">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </a>
+                </th>
+                <th>
+                    <i class="@sortModel.GetColumn("ParentLevelId").SortIcon" arial-hidden="true"></i>
+                    <a asp-action="Index"
+                       asp-route-sortExpression="@sortModel.GetColumn("ParentLevelId").SortExpression"
+                       asp-route-pg="@pager.CurrentPage"
+                       asp-route-pageSize="@pager.PageSize"
+                       asp-route-SearchText="@ViewData["SearchText"]">
+                        @Html.DisplayNameFor(model => model.ParentLevelId)
+                    </a>
+                </th>
+                <th>
+                    <i class="@sortModel.GetColumn("ClassificationId").SortIcon" arial-hidden="true"></i>
+                    <a asp-action="Index"
+                       asp-route-sortExpression="@sortModel.GetColumn("ClassificationId").SortExpression"
+                       asp-route-pg="@pager.CurrentPage"
+                       asp-route-pageSize="@pager.PageSize"
+                       asp-route-SearchText="@ViewData["SearchText"]">
+                        @Html.DisplayNameFor(model => model.ClassificationId)
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LocationId)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @(item.ParentLevel == null
+                            ? null
+                            : @Html.DisplayFor(modelItem => item.ParentLevel.Name)
+                            )
+                    </td>
+                    <td>
+                        @(item.Classification == null
+                            ? null
+                            : @Html.DisplayFor(modelItem => item.Classification.Name)
+                            )
+                    </td>
+                    <td>
+                        @(item.Location == null
+                            ? null
+                            : @Html.DisplayFor(modelItem => item.Location.Name)
+                            )
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">
+                            <span class="btn btn-sm btn-outline-warning">
+                                <i class="fa fa-edit" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="تعديل الأمر"></i>
+                            </span>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">
+                            <span class="btn btn-sm btn-outline-danger">
+                                <i class="fa fa-trash" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="حذف الأمر"></i>
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="card-footer" style="height:50px">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

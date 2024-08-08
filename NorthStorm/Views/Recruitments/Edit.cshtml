@@ -1,0 +1,58 @@
+﻿@model NorthStorm.Models.Recruitment
+
+@{
+    Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+    ViewData["Title"] = "تعديل قيد";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p>
+    <span class="text-danger h4">
+    </span>
+</p>
+
+<div class="card bg-light mb-3">
+    <div class="card-header">بيانات القيد</div>
+    <form asp-action="Edit" class="card-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="row col-md-12">
+            <div class="form-group col-md-4">
+                <label asp-for="ReferenceNo" class="control-label"></label>
+                <input asp-for="ReferenceNo" class="form-control" />
+                <span asp-validation-for="ReferenceNo" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-2">
+                <label asp-for="ReferenceDate" class="control-label"></label>
+                <input asp-for="ReferenceDate" class="form-control" />
+                <span asp-validation-for="ReferenceDate" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-4">
+                <label asp-for="Subject" class="control-label"></label>
+                <input asp-for="Subject" class="form-control" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-2 align-self-end text-md-center">
+                <input type="submit" value="حفظ" class="btn btn-primary w-75" />
+            </div>
+        </div>
+    </form>
+    <div class="card-footer">
+        <br />
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">إلغاء</a>
+</div>
+
+@section Scripts {
+    @{
+
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

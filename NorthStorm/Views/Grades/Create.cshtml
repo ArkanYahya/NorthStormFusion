@@ -1,0 +1,124 @@
+﻿@model NorthStorm.Models.Assistants.Grade
+
+@{
+	Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+	ViewData["Title"] = "إنشاء قيد";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+
+<div class="card bg-light mb-3">
+	<div class="card-header">بيانات القيد</div>
+	<form asp-action="Create" class="card-body">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<input type="hidden" asp-for="Id" />
+		<div class="row col-md-12">
+			<div class="form-group col-md-2">
+				<label asp-for="GradeNumber" class="control-label"></label>
+				<input asp-for="GradeNumber" class="form-control" />
+				<span asp-validation-for="GradeNumber" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="GradeAsWriting" class="control-label"></label>
+				<input asp-for="GradeAsWriting" class="form-control" />
+				<span asp-validation-for="GradeAsWriting" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row col-md-12">
+			<div class="form-group col-md-2">
+				<label asp-for="Stage01" class="control-label"></label>
+				<input asp-for="Stage01" class="form-control" />
+				<span asp-validation-for="Stage01" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="Stage02" class="control-label"></label>
+				<input asp-for="Stage02" class="form-control" />
+				<span asp-validation-for="Stage02" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="Stage03" class="control-label"></label>
+				<input asp-for="Stage03" class="form-control" />
+				<span asp-validation-for="Stage03" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="Stage04" class="control-label"></label>
+				<input asp-for="Stage04" class="form-control" />
+				<span asp-validation-for="Stage04" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="Stage05" class="control-label"></label>
+				<input asp-for="Stage05" class="form-control" />
+				<span asp-validation-for="Stage05" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="Stage06" class="control-label"></label>
+				<input asp-for="Stage06" class="form-control" />
+				<span asp-validation-for="Stage06" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="Stage07" class="control-label"></label>
+				<input asp-for="Stage07" class="form-control" />
+				<span asp-validation-for="Stage07" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="Stage08" class="control-label"></label>
+				<input asp-for="Stage08" class="form-control" />
+				<span asp-validation-for="Stage08" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="Stage09" class="control-label"></label>
+				<input asp-for="Stage09" class="form-control" />
+				<span asp-validation-for="Stage09" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="Stage10" class="control-label"></label>
+				<input asp-for="Stage10" class="form-control" />
+				<span asp-validation-for="Stage10" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="Stage11" class="control-label"></label>
+				<input asp-for="Stage11" class="form-control" />
+				<span asp-validation-for="Stage11" class="text-danger"></span>
+			</div>
+
+		</div>
+		<div class="row col-md-12">
+			<div class="form-group col-md-2">
+				<label asp-for="AnnualBonus" class="control-label"></label>
+				<input asp-for="AnnualBonus" class="form-control" />
+				<span asp-validation-for="AnnualBonus" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="MinimumDuration" class="control-label"></label>
+				<input asp-for="MinimumDuration" class="form-control" />
+				<span asp-validation-for="MinimumDuration" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+			</div>
+			<div class="form-group col-md-2">
+			</div>
+			<div class="form-group col-md-2">
+			</div>
+			<div class="form-group col-md-2 align-self-end text-md-center">
+				<input type="submit" value="حفظ" class="btn btn-primary w-75" />
+			</div>
+		</div>
+	</form>
+	<div class="card-footer">
+		<br />
+
+	</div>
+</div>
+
+<div>
+	<a asp-action="Index">إلغاء</a>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+	}
+}

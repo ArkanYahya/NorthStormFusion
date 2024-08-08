@@ -1,0 +1,256 @@
+﻿@model NorthStorm.Models.Recruitment
+
+@{
+    Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+    ViewData["Title"] = "إنشاء قيد";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p>
+    <span class="text-danger h4">
+    </span>
+</p>
+
+
+<div class="card">
+    <div class="card-header text-center">
+        بيانات القيد
+    </div>
+
+    <form id="CodeSbyAnizForm" asp-action="Create" class="card-body">
+
+        <div class="row col-12">
+
+            <div class="row col-md-12">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group col-1 ">
+                    <label asp-for="ReferenceNo" class="control-label"></label>
+                </div>
+                <div class="form-group col-2">
+                    <input asp-for="ReferenceNo" class="form-control" />
+                    <span asp-validation-for="ReferenceNo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-1">
+                </div>
+
+                <div class="form-group col-1">
+                    <label asp-for="ReferenceDate" class="control-label"></label>
+                </div>
+                <div class="form-group col-2">
+                    <input asp-for="ReferenceDate" class="form-control" />
+                    <span asp-validation-for="ReferenceDate" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group col-1">
+                </div>
+
+                <div class="form-group col-2">
+                    <label asp-for="Subject" class="control-label"></label>
+                </div>
+                <div class="form-group col-2">
+                    <input asp-for="Subject" class="form-control" />
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="row col-md-12">
+                <div class="col-12">
+                    <table id="CodesTable" class="table table-borderless table-sm mb-0 pb-0 border CodesTable">
+                        <thead>
+                            <tr>
+                                <th>رقم الشركة</th>
+                                <th>الاسم الأول</th>
+                                <th>الاسم الثاني</th>
+                                <th>الاسم الثالث</th>
+                                <th>الاسم الرابع</th>
+                                <th>اللقب</th>
+                                <th>الولادة</th>
+                                <th>الجنس</th>
+                                <th>الديانة</th>
+                                <th>العرق</th>
+                                <th>الجنسية</th>
+                                <th>الحالة</th>
+
+
+                                <th style="width:60px;">
+                                    <button id='btnAddDetailRow' type="button" class="btn btn-sm btn-secondary visible" onclick="AddItem(this)">
+                                        +
+                                    </button>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="CsDiv">
+                            @for (int i = 0; i < Model.Employees.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <input asp-for="@Model.Employees.ElementAt(i).Id" class="form-control EmpTotal" />
+                                        <span asp-validation-for="@Model.Employees.ElementAt(i).Id" class="text-danger"></span>
+                                    </td>
+
+                                    <td>
+                                        <input asp-for="@Model.Employees.ElementAt(i).FirstName" class="form-control" />
+                                        <input type="hidden" asp-for="@Model.Employees.ElementAt(i).IsDeleted" />
+                                    </td>
+                                    <td>
+                                        <input asp-for="@Model.Employees.ElementAt(i).MiddleName" class="form-control QtyTotal" />
+                                        <span asp-validation-for="@Model.Employees.ElementAt(i).MiddleName" class="text-danger"></span>
+                                    </td>
+
+                                    <td>
+                                        <input asp-for="@Model.Employees.ElementAt(i).LastName" class="form-control" />
+                                        <span asp-validation-for="@Model.Employees.ElementAt(i).LastName" class="text-danger"></span>
+                                    </td>
+
+                                    <td>
+                                        <input asp-for="@Model.Employees.ElementAt(i).FourthName" class="form-control" />
+                                        <span asp-validation-for="@Model.Employees.ElementAt(i).FourthName" class="text-danger"></span>
+                                    </td>
+
+                                    <td>
+                                        <input asp-for="@Model.Employees.ElementAt(i).SurName" class="form-control" />
+                                        <span asp-validation-for="@Model.Employees.ElementAt(i).SurName" class="text-danger"></span>
+                                    </td>
+                                    <td>
+                                        <input asp-for="@Model.Employees.ElementAt(i).BirthDate" class="form-control" />
+                                        <span asp-validation-for="@Model.Employees.ElementAt(i).BirthDate" class="text-danger"></span>
+                                    </td>
+                                    <td>
+                                        <select asp-for="@Model.Employees.ElementAt(i).GenderId" class="form-control" asp-items="ViewBag.GenderId">
+                                            <option value="">-- إختر الجنس --</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select asp-for="@Model.Employees.ElementAt(i).ReligionId" class="form-control" asp-items="ViewBag.ReligionId">
+                                            <option value="">-- إختر الديانة --</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select asp-for="@Model.Employees.ElementAt(i).RaceId" class="form-control" asp-items="ViewBag.RaceId">
+                                            <option value="">-- إختر القومية --</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select asp-for="@Model.Employees.ElementAt(i).NationalityId" class="form-control" asp-items="ViewBag.NationalityId">
+                                            <option value="">-- إختر الجنسية --</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select asp-for="@Model.Employees.ElementAt(i).StatusId" class="form-control" asp-items="ViewBag.StatusId">
+                                            <option value="">-- إختر الحالة --</option>
+                                        </select>
+                                    </td>
+                                    <td style="width:60px;">
+                                        <button id='btnremove-@i' type="button" class="btn btn-sm btn-danger visible" onclick="DeleteItem(this)">
+                                            -
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+                    <table class="table table-sm mb-0 pb-0 border">
+                        <thead>
+                            <tr>
+                                <th style="width:13%;">
+                                    المجموع
+                                </th>
+
+                                <th style="width:13%;">
+                                    <input type="text" id="txtQtyTotal" class="form-control form-control-plaintext" value="1" />
+                                </th>
+
+                                <th style="width:13%;">
+                                </th>
+
+                                <th style="width:13%;">
+                                </th>
+
+                                <th style="width:13%;">
+                                </th>
+
+                                <th style="width:13%;">
+                                </th>
+
+                                <th style="width:13%;">
+                                    <input type="text" id="txtAmountTotal" class="form-control form-control-plaintext" value="" />
+                                </th>
+
+                                <th style="width:9%;">
+                                </th>
+                            </tr>
+
+                        </thead>
+                    </table>
+
+                </div>
+
+                <div class="form-group col-12">
+                </div>
+
+                <div class="form-group col-12">
+                </div>
+
+            </div>
+
+
+            <div class="form-group btn-group col-1">
+
+                @*
+                <select id="dropdownExRate" class="form-control" size="1" style="visibility: hidden;" asp-items="ViewBag.ExchangeRate">
+                </select> *@
+
+                <div class="form-group invisible">
+                    @*                     <select id="mySelect" class="form-control" size="5"
+                    style="visibility: hidden;" asp-items="ViewBag.ProductList">
+                    </select>
+                    <input id="txtValue" class="form-control col-2 invisible" /> *@
+                </div>
+
+                <div ID="HiddenDiv" style="visibility: hidden;">
+                    @*                     <input asp-for="PoDate" class="form-control" />
+                    <select asp-for="BaseCurrencyId" class="form-control"
+                    asp-items="ViewBag.BaseCurrencyList"></select> *@
+
+
+                    @*                     <select id="dropdownUnitNames" class="form-control"
+                    size="1" style="visibility: hidden;"
+                    asp-items="ViewBag.UnitNames">
+                    </select> *@
+                </div>
+
+            </div>
+
+
+            <div class="form-group btn-group col-12">
+                <div class="col-1"></div>
+                <div class="col-5">
+                    <input type="submit" value="حفظ" class="btn btn-primary btn-block w-75" />
+                </div>
+                <div class="col-5">
+                    <a class="btn btn-secondary btn-block w-75" asp-action="index"
+                       asp-route-pg="@TempData.Peek("CurrentPage")">إلغاء</a>
+                </div>
+                <div class="col-1"></div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+}

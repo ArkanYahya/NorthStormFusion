@@ -1,0 +1,98 @@
+﻿@model IEnumerable<NorthStorm.Models.Classifications.JobTitleClassification>
+
+    @using NorthStorm.Models.ViewModels;
+@{
+    string pageTitle = "تصنيفات العنوان الوظيفي";
+    ViewData["Title"] = pageTitle;
+    SortModel sortModel = (SortModel)ViewData["sortModel"];
+    PagerModel pager = ViewBag.Pager;
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p>
+    <a asp-action="Create" class="d-flex justify-content-end h5">
+        إنشاء قيد
+    </a>
+</p>
+<div class="card bg-light mb-3">
+    <div class="card-header">
+        <partial name="_topBar" model="@pager" />
+    </div>
+
+    <table class="table card-body">
+        <thead>
+            <tr>
+                <th>
+                    <i class="@sortModel.GetColumn("Id").SortIcon" arial-hidden="true"></i>
+                    <a asp-action="Index"
+                       asp-route-sortExpression="@sortModel.GetColumn("Id").SortExpression"
+                       asp-route-pg="@pager.CurrentPage"
+                       asp-route-pageSize="@pager.PageSize"
+                       asp-route-SearchText="@ViewData["SearchText"]">
+                        @Html.DisplayNameFor(model => model.Id)
+                    </a>
+                </th>
+                <th>
+                    <i class="@sortModel.GetColumn("Name").SortIcon" arial-hidden="true"></i>
+                    <a asp-action="Index"
+                       asp-route-sortExpression="@sortModel.GetColumn("Name").SortExpression"
+                       asp-route-pg="@pager.CurrentPage"
+                       asp-route-pageSize="@pager.PageSize"
+                       asp-route-SearchText="@ViewData["SearchText"]">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KirkukSymbol)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BaghdadSymbol)
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KirkukSymbol)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BaghdadSymbol)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">
+                            <span class="btn btn-sm btn-outline-warning">
+                                <i class="fa fa-edit" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="تعديل الأمر"></i>
+                            </span>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">
+                            <span class="btn btn-sm btn-outline-danger">
+                                <i class="fa fa-trash" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="حذف الأمر"></i>
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="card-footer" style="height:50px">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

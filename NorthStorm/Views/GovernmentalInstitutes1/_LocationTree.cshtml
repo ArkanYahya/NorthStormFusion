@@ -1,0 +1,14 @@
+﻿@model NorthStorm.Models.Assistants.GovernmentalInstitute
+
+<li>
+    @Model.Name
+    @if (Model.ChildGovernmentalInstitutes != null && Model.ChildGovernmentalInstitutes.Any())
+    {
+        <ul>
+            @foreach (var childGovernmentalInstitute in Model.ChildGovernmentalInstitutes)
+            {
+                @Html.Partial("_LocationTree", childGovernmentalInstitute)
+            }
+        </ul>
+    }
+</li>

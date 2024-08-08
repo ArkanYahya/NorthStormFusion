@@ -1,0 +1,24 @@
+﻿@model NorthStorm.Models.Assistants.Location
+
+
+@if (Model.ChildLocations != null && Model.ChildLocations.Count > 0)
+{
+    <button data-bs-toggle="collapse" data-bs-target="#node-@Model.Id"
+            aria-expanded="false" aria-controls="node-@Model.Id">
+        &#x25C0; <!-- Right-pointing triangle -->
+    </button>
+}
+<a>@Model.Name</a>
+@if (Model.ChildLocations != null && Model.ChildLocations.Count > 0)
+{
+    <div class="collapse" id="node-@Model.Id">
+        <ul>
+            @foreach (var child in Model.ChildLocations)
+            {
+                <li>
+                    @Html.Partial("_TreeNodePartial", child)
+                </li>
+            }
+        </ul>
+    </div>
+}

@@ -1,0 +1,714 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="~/img/favicon.png" rel="icon">
+    <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/vendor/bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet" asp-append-version="true">
+    <link href="~/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" asp-append-version="true">
+    <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" asp-append-version="true">
+    <link href="~/vendor/quill/quill.snow.css" rel="stylesheet" asp-append-version="true">
+    <link href="~/vendor/quill/quill.bubble.css" rel="stylesheet" asp-append-version="true">
+    <link href="~/vendor/remixicon/remixicon.css" rel="stylesheet" asp-append-version="true">
+    <link href="~/vendor/simple-datatables/style.css" rel="stylesheet" asp-append-version="true">
+
+    <!-- Template Main CSS File -->
+    <link href="~/css/style.css" rel="stylesheet" asp-append-version="true">
+
+    <!-- =======================================================
+    * Template Name: NiceAdmin
+    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    * Updated: Apr 20 2024 with Bootstrap v5.3.3
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+    <style>
+        .sidebar {
+            width: 300px;
+            position: fixed;
+            top: 50px; /* Adjusted to 50px for correct positioning */
+            right: 0;
+            height: 100vh;
+            background-color: #f8f9fa;
+            border-left: 1px solid #dee2e6;
+            transition: transform 0.3s ease, display 0.3s ease;
+        }
+
+        .content {
+            margin-right: 300px;
+            width: calc(100% - 300px);
+            padding: 20px;
+            transition: margin-right 0.3s ease;
+        }
+
+        .sidebar-hidden .sidebar {
+            transform: translateX(100%);
+        }
+
+        .sidebar-hidden .content {
+            margin-right: 0;
+            width: 100%;
+        }
+
+        @@media (max-width: 1199px) {
+            .sidebar {
+                display: none;
+            }
+
+            .sidebar-visible .sidebar {
+                display: block;
+                transform: translateX(0);
+            }
+
+            .sidebar-hidden .sidebar {
+                display: none;
+            }
+
+            .content {
+                margin-right: 0;
+                width: 100%;
+            }
+        }
+
+        .thumbnail-tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .thumbnail-popup {
+            display: none;
+            position: fixed;
+            width: 300px;
+            padding: 5px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+    </style>
+
+</head>
+
+<body class="sidebar-visible">
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="~/Admin" class="logo d-flex align-items-center">
+                <img src="~/img/logo.png" alt="">
+                <span class="d-none d-lg-block">NorthStorm ERP</span>
+            </a>
+            <i id="sidebarToggle" class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
+
+        <div class="search-bar" dir="ltr">
+            <form class="search-form d-flex align-items-center" method="POST" action="#">
+                <input type="text" name="query" placeholder="بــحـــث" title="أدخل معلمة البحث">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form>
+        </div><!-- End Search Bar -->
+
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+
+                <li class="nav-item d-block d-lg-none">
+                    <a class="nav-link nav-icon search-bar-toggle " href="#">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li><!-- End Search Icon-->
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="badge bg-primary badge-number">4</span>
+                    </a><!-- End Notification Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                        <li class="dropdown-header">
+                            لديك 4 إشعارات جديدة
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">فتح الكل</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-exclamation-circle text-warning"></i>
+                            <div>
+                                <h4>ترقيات 8/ 2024</h4>
+                                <p>لديك 533 موظف مستحق للتريقة</p>
+                                <p>منذ 30 دقيقة</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-x-circle text-danger"></i>
+                            <div>
+                                <h4>كتب متأخرة</h4>
+                                <p>لديك 3 كتب متأخرة بالرد</p>
+                                <p>منذ 2 يوم</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-check-circle text-success"></i>
+                            <div>
+                                <h4>ترقيات 7/2024</h4>
+                                <p>تم تصدير الأمر الإداري الخاص بترقيات 7/2024</p>
+                                <p>منذ 6 يوم</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-info-circle text-primary"></i>
+                            <div>
+                                <h4>كتب واردة</h4>
+                                <p>لديك 2 كتاب وارد جديد</p>
+                                <p>منذ 4 ساعات</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="dropdown-footer">
+                            <a href="#">المزيد</a>
+                        </li>
+
+                    </ul><!-- End Notification Dropdown Items -->
+
+                </li><!-- End Notification Nav -->
+
+                <li class="nav-item dropdown me-4">
+
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-chat-left-text"></i>
+                        <span class="badge bg-success badge-number">3</span>
+                    </a><!-- End Messages Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                        <li class="dropdown-header">
+                            لديك 3 رسائل جديدة
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">فتح الكل</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="~/img/messages-3.jpg" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>محمد حميد</h4>
+                                    <p>السلام عليكم، تم تحديث واجهة إدخال الموظفين وحسب طلبكم في...</p>
+                                    <p>منذ ساعتين</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="~/img/messages-2.jpg" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>سامية قاسم</h4>
+                                    <p>صباح الخير، رجاء ارسل لي شروط الترقية للدرجة الخامسة...</p>
+                                    <p>منذ 6 ساعات</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="~/img/messages-1.jpg" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>سلوى صبحي</h4>
+                                    <p>مساء النور، قمت بإدخال بيانات الترقيات الخاصبة بالمحضر الأخيرة وحصل...</p>
+                                    <p>منذ 1 يوم</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="dropdown-footer">
+                            <a href="#">المزيد</a>
+                        </li>
+
+                    </ul><!-- End Messages Dropdown Items -->
+
+                </li><!-- End Messages Nav -->
+
+                <li class="nav-item dropdown pe-3">
+
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <img src="~/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2">صبحي محمد</span>
+                    </a><!-- End Profile Image Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            <h6>صبحى محمد</h6>
+                            <span>مدخل بيانات</span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                <i class="bi bi-person me-2"></i>
+                                <span>الملف الشخصي</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                <i class="bi bi-gear me-2"></i>
+                                <span>إعدادات الحساب</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                                <i class="bi bi-question-circle me-2"></i>
+                                <span>طلب المساعدة؟</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="bi bi-box-arrow-right me-2"></i>
+                                <span>تسجيل الخروج</span>
+                            </a>
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar sidebar-visible">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link " href="index.html">
+                    <i class="bi bi-grid"></i>
+                    <span>لوحة السيطرة</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-bar-chart me-2"></i><span>شعبة الترقيات</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="charts-nav" class="nav-content collapse ms-5" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="">
+                            <i class="bi bi-circle me-2"></i><span>الموظفين</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="bi bi-circle me-2"></i><span>نظام الأفراد</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="bi bi-circle me-2"></i><span>نظام المراسلات</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Charts Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="bi bi-menu-button me-2"></i>
+                    <span>وحدة الترقيات والترفيع</span>
+                </a>
+            </li><!-- End Contact Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="bi bi-menu-button me-2"></i>
+                    <span>وحدة تغيير العناوين الوظيفية</span>
+                </a>
+            </li><!-- End Contact Page Nav -->
+
+                        <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="bi bi-menu-button me-2"></i>
+                    <span>وحدة ترقيات رؤساء المهن</span>
+                </a>
+            </li><!-- End Contact Page Nav -->
+
+
+         @*    <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-menu-button-wide me-2"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="components-nav" class="nav-content collapse ms-5" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="components-alerts.html">
+                            <i class="bi bi-circle me-2"></i><span>Alerts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components-accordion.html">
+                            <i class="bi bi-circle me-2"></i><span>Accordion</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components-badges.html">
+                            <i class="bi bi-circle me-2"></i><span>Badges</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components-breadcrumbs.html">
+                            <i class="bi bi-circle me-2"></i><span>Breadcrumbs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components-buttons.html">
+                            <i class="bi bi-circle me-2"></i><span>Buttons</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components-cards.html">
+                            <i class="bi bi-circle me-2"></i><span>Cards</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components-carousel.html">
+                            <i class="bi bi-circle me-2"></i><span>Carousel</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components-list-group.html">
+                            <i class="bi bi-circle me-2"></i><span>List group</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components-modal.html">
+                            <i class="bi bi-circle me-2"></i><span>Modal</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components-tabs.html">
+                            <i class="bi bi-circle me-2"></i><span>Tabs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components-pagination.html">
+                            <i class="bi bi-circle me-2"></i><span>Pagination</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components-progress.html">
+                            <i class="bi bi-circle me-2"></i><span>Progress</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components-spinners.html">
+                            <i class="bi bi-circle me-2"></i><span>Spinners</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="components-tooltips.html">
+                            <i class="bi bi-circle me-2"></i><span>Tooltips</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Components Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text me-2"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="forms-nav" class="nav-content collapse ms-5" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="forms-elements.html">
+                            <i class="bi bi-circle me-2"></i><span>Form Elements</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="forms-layouts.html">
+                            <i class="bi bi-circle me-2"></i><span>Form Layouts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="forms-editors.html">
+                            <i class="bi bi-circle me-2"></i><span>Form Editors</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="forms-validation.html">
+                            <i class="bi bi-circle me-2"></i><span>Form Validation</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Forms Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-layout-text-window-reverse me-2"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="tables-nav" class="nav-content collapse ms-5" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="tables-general.html">
+                            <i class="bi bi-circle me-2"></i><span>General Tables</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tables-data.html">
+                            <i class="bi bi-circle me-2"></i><span>Data Tables</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Tables Nav --> *@
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-bar-chart me-2"></i><span>تقارير</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="charts-nav" class="nav-content collapse ms-5" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="charts-chartjs.html">
+                            <i class="bi bi-circle me-2"></i><span>تقارير عامة</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="charts-apexcharts.html">
+                            <i class="bi bi-circle me-2"></i><span>تقارير الترقيات</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="charts-echarts.html">
+                            <i class="bi bi-circle me-2"></i><span>تقارير مخصصة</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Charts Nav -->
+
+@*             <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-gem me-2"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="icons-nav" class="nav-content collapse ms-5" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="icons-bootstrap.html">
+                            <i class="bi bi-circle me-2"></i><span>Bootstrap Icons</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="icons-remix.html">
+                            <i class="bi bi-circle me-2"></i><span>Remix Icons</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="icons-boxicons.html">
+                            <i class="bi bi-circle me-2"></i><span>Boxicons</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Icons Nav -->
+ *@
+            <li class="nav-heading">الصفحات</li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="users-profile.html">
+                    <i class="bi bi-person me-2"></i><span>الملف التعريفي</span>
+                </a>
+            </li><!-- End Profile Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="pages-faq.html">
+                    <i class="bi bi-question-circle me-2"></i>
+                    <span>الأسئلة المتكررة</span>
+                </a>
+            </li><!-- End F.A.Q Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="pages-contact.html">
+                    <i class="bi bi-envelope me-2"></i>
+                    <span>معلومات التواصل</span>
+                </a>
+            </li><!-- End Contact Page Nav -->
+            @* <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-register.html">
+            <i class="bi bi-card-list me-2"></i>
+            <span>Register</span>
+            </a>
+            </li><!-- End Register Page Nav -->
+
+            <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-login.html">
+            <i class="bi bi-box-arrow-in-right me-2"></i>
+            <span>Login</span>
+            </a>
+            </li><!-- End Login Page Nav -->
+
+            <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-error-404.html">
+            <i class="bi bi-dash-circle me-2"></i>
+            <span>Error 404</span>
+            </a>
+            </li><!-- End Error 404 Page Nav -->
+
+            <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-blank.html">
+            <i class="bi bi-file-earmark me-2"></i>
+            <span>Blank</span>
+            </a>
+            </li><!-- End Blank Page Nav -->
+            *@
+        </ul>
+
+    </aside><!-- End Sidebar-->
+    @RenderBody()
+
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="~/vendor/apexcharts/apexcharts.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/chart.js/chart.umd.js" asp-append-version="true"></script>
+    <script src="~/vendor/echarts/echarts.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/quill/quill.js" asp-append-version="true"></script>
+    <script src="~/vendor/simple-datatables/simple-datatables.js" asp-append-version="true"></script>
+    <script src="~/vendor/tinymce/tinymce.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/php-email-form/validate.js" asp-append-version="true"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/js/admin.js" asp-append-version="true"></script>
+    <script>
+        document.getElementById('sidebarToggle').addEventListener('click', function () {
+            const body = document.body;
+            const sidebar = document.querySelector('.sidebar');
+
+            if (window.innerWidth <= 1199) {
+                if (sidebar.style.display === 'block' || sidebar.classList.contains('sidebar-visible')) {
+                    sidebar.style.display = 'none';
+                    sidebar.classList.remove('sidebar-visible');
+                    sidebar.classList.add('sidebar-hidden');
+                } else {
+                    sidebar.style.display = 'block';
+                    sidebar.classList.remove('sidebar-hidden');
+                    sidebar.classList.add('sidebar-visible');
+                }
+            } else {
+                body.classList.toggle('sidebar-hidden');
+                body.classList.toggle('sidebar-visible');
+            }
+        });
+
+        window.addEventListener('resize', function () {
+            const body = document.body;
+            const sidebar = document.querySelector('.sidebar');
+            if (window.innerWidth > 1199) {
+                if (body.classList.contains('sidebar-visible')) {
+                    sidebar.style.display = '';
+                    sidebar.classList.remove('sidebar-hidden');
+                    sidebar.classList.add('sidebar-visible');
+                    body.classList.remove('sidebar-hidden');
+                    body.classList.add('sidebar-visible');
+                }
+            } else {
+                if (body.classList.contains('sidebar-visible')) {
+                    sidebar.style.display = 'none';
+                }
+                if (sidebar.classList.contains('sidebar-visible')) {
+                    body.classList.add('sidebar-visible');
+                    body.classList.remove('sidebar-hidden');
+                } else {
+                    //body.classList.remove('sidebar-visible');
+                    //body.classList.add('sidebar-hidden');
+                }
+            }
+        });
+
+        // Ensure sidebar visibility state is correct on page load
+        window.dispatchEvent(new Event('resize'));
+
+        document.querySelectorAll('.thumbnail-img').forEach(img => {
+            img.addEventListener('mouseenter', function () {
+                const popup = document.createElement('div');
+                popup.className = 'thumbnail-popup';
+                const popupImg = document.createElement('img');
+                popupImg.src = this.src;
+                popupImg.className = 'img-fluid';
+                popup.appendChild(popupImg);
+                document.body.appendChild(popup);
+
+                const rect = this.getBoundingClientRect();
+                popup.style.top = `${rect.top - popup.offsetHeight - 10}px`;
+                popup.style.left = `${rect.left + rect.width / 2 - popup.offsetWidth / 2}px`;
+                popup.style.display = 'block';
+
+                this.addEventListener('mouseleave', function () {
+                    document.body.removeChild(popup);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

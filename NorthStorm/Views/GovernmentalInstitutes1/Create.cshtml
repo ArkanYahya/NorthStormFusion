@@ -1,0 +1,31 @@
+﻿@model NorthStorm.Models.Assistants.GovernmentalInstitute
+
+@{
+    ViewData["Title"] = "Create GovernmentalInstitute";
+}
+
+<h1>Create GovernmentalInstitute</h1>
+
+<div>
+    <form asp-action="Create">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ParentGovernmentalInstituteId" class="control-label">Parent GovernmentalInstitute</label>
+            <select asp-for="ParentGovernmentalInstituteId" class="form-control">
+                <option value="">Select Parent GovernmentalInstitute</option>
+                @foreach (var governmentalInstitute in ViewBag.ParentGovernmentalInstitutes)
+                {
+                    <option value="@governmentalInstitute.Value">@governmentalInstitute.Text</option>
+                }
+            </select>
+            <span asp-validation-for="ParentGovernmentalInstituteId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

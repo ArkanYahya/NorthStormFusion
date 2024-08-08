@@ -1,0 +1,10 @@
+﻿@model List<NorthStorm.Models.Assistants.TreeNode>
+
+<ul>
+    @foreach (var child in Model)
+    {
+        <li>
+            @Html.Partial("_TreeNodePartialList", child)
+        </li>
+    }
+</ul>

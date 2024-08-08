@@ -1,0 +1,178 @@
+﻿@model IEnumerable<NorthStorm.Models.Assistants.Grade>
+
+@using NorthStorm.Models.ViewModels;
+
+@{
+	Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+	ViewData["Title"] = "جدول الدرجات والرواتب (دينار عراقي)";
+	SortModel sortModel = (SortModel)ViewData["sortModel"];
+	PagerModel pager = ViewBag.Pager;
+}
+
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p dir="ltr">
+	<a asp-controller="Grades" asp-action="Create" class="h5">إنشاء قيد</a>
+</p>
+
+<div class="card bg-light mb-3">
+	<div class="card-header">
+		<partial name="_topBar" model="@pager" />
+	</div>
+	<table class="table card-body">
+		<thead>
+			<tr>
+				<th>
+					<i class="@sortModel.GetColumn("Id").SortIcon" arial-hidden="true"></i>
+					<a asp-action="Index"
+					   asp-route-sortExpression="@sortModel.GetColumn("Id").SortExpression"
+					   asp-route-pg="@pager.CurrentPage"
+					   asp-route-pageSize="@pager.PageSize"
+					   asp-route-SearchText="@ViewData["SearchText"]">
+						@Html.DisplayNameFor(model => model.Id)
+					</a>
+				</th>
+				<th>
+					<i class="@sortModel.GetColumn("GradeNumber").SortIcon" arial-hidden="true"></i>
+					<a asp-action="Index"
+					   asp-route-sortExpression="@sortModel.GetColumn("GradeNumber").SortExpression"
+					   asp-route-pg="@pager.CurrentPage"
+					   asp-route-pageSize="@pager.PageSize"
+					   asp-route-SearchText="@ViewData["SearchText"]">
+						@Html.DisplayNameFor(model => model.GradeNumber)
+					</a>
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.GradeAsWriting)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Stage01)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Stage02)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Stage03)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Stage04)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Stage05)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Stage06)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Stage07)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Stage08)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Stage09)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Stage10)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Stage11)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.AnnualBonus)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.MinimumDuration)
+				</th>
+				<th>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr class="">
+					<td>
+						@Html.DisplayFor(modelItem => item.Id)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.GradeNumber)
+					</td>
+										<td>
+						@Html.DisplayFor(modelItem => item.GradeAsWriting)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Stage01)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Stage02)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Stage03)
+					</td>
+										<td>
+						@Html.DisplayFor(modelItem => item.Stage04)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Stage05)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Stage06)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Stage07)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Stage08)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Stage09)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Stage10)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Stage11)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.AnnualBonus)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.MinimumDuration)
+					</td>
+					<td>
+						<a asp-action="Details" asp-route-id="@item.Id">
+							<span class="btn btn-sm btn-outline-primary">
+								<i class="fa fa-eye" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="عرض التفاصيل"></i>
+							</span>
+						</a>
+
+						<a asp-action="Edit" asp-route-id="@item.Id">
+							<span class="btn btn-sm btn-outline-warning">
+								<i class="fa fa-edit" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="تعديل القيد"></i>
+							</span>
+						</a>
+
+						<a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">
+							<span class="btn btn-sm btn-outline-danger">
+								<i class="fa fa-trash" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="حذف القيد"></i>
+							</span>
+						</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	<div class="card-footer" style="height:50px">
+		<partial name="_bottomBar" model="@pager" />
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}
+

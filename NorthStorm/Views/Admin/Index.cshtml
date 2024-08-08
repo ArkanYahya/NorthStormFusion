@@ -1,0 +1,663 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "NorthStorm ERP - DashBoard";
+}
+
+<main id="main" class="main content">
+
+    <div class="pagetitle">
+        <h1>لوحة السيطرة</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">الرئيسية</a></li>
+                <li class="breadcrumb-item active">لوحة السيطرة</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <!-- Left side columns -->
+            <div class="col-lg-8">
+                <div class="row">
+
+                    <!-- Sales Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card sales-card">
+
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>تصفية</h6>
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="#">هذا اليوم</a></li>
+                                    <li><a class="dropdown-item" href="#">هذا الشهر</a></li>
+                                    <li><a class="dropdown-item" href="#">هذه السنة</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">الكتب الوارد <span>| اليوم</span></h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-cart"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>5</h6>
+                                        <span class="text-success small pt-1 fw-bold">2%</span> <span class="text-muted small pt-2 ps-1">زيادة</span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- End Sales Card -->
+                    <!-- Revenue Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card revenue-card">
+
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>تصفية</h6>
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="#">هذا اليوم</a></li>
+                                    <li><a class="dropdown-item" href="#">هذا الشهر</a></li>
+                                    <li><a class="dropdown-item" href="#">هذه السنة</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">الاحصائيات <span>| هذا الشهر</span></h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-currency-dollar"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>34</h6>
+                                        <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">زيادة</span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- End Revenue Card -->
+                    <!-- Customers Card -->
+                    <div class="col-xxl-4 col-xl-12">
+
+                        <div class="card info-card customers-card">
+
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>تصفية</h6>
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="#">هذا اليوم</a></li>
+                                    <li><a class="dropdown-item" href="#">هذا الشهر</a></li>
+                                    <li><a class="dropdown-item" href="#">هذه السنة</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">محاضر ترقية <span>| هذه السنة</span></h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-people"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>6</h6>
+                                        <span class="text-danger small pt-1 fw-bold">1%</span> <span class="text-muted small pt-2 ps-1">نزول</span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div><!-- End Customers Card -->
+                    <!-- Reports -->
+                    <div class="col-12">
+                        <div class="card">
+
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>تصفية</h6>
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="#">هذا اليوم</a></li>
+                                    <li><a class="dropdown-item" href="#">هذا الشهر</a></li>
+                                    <li><a class="dropdown-item" href="#">هذه السنة</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">تقارير <span>/هذا الشهر</span></h5>
+
+                                <!-- Line Chart -->
+                                <div id="reportsChart"></div>
+
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", () => {
+                                        new ApexCharts(document.querySelector("#reportsChart"), {
+                                            series: [{
+                                                name: 'البريد الوارد',
+                                                data: [31, 40, 28, 51, 42, 82, 56],
+                                            }, {
+                                                name: 'البريد الصادر',
+                                                data: [11, 32, 45, 32, 34, 52, 41]
+                                            }, {
+                                                name: 'البريد المتأخر',
+                                                data: [15, 11, 32, 18, 9, 24, 11]
+                                            }],
+                                            chart: {
+                                                height: 350,
+                                                type: 'area',
+                                                toolbar: {
+                                                    show: false
+                                                },
+                                            },
+                                            markers: {
+                                                size: 4
+                                            },
+                                            colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                                            fill: {
+                                                type: "gradient",
+                                                gradient: {
+                                                    shadeIntensity: 1,
+                                                    opacityFrom: 0.3,
+                                                    opacityTo: 0.4,
+                                                    stops: [0, 90, 100]
+                                                }
+                                            },
+                                            dataLabels: {
+                                                enabled: false
+                                            },
+                                            stroke: {
+                                                curve: 'smooth',
+                                                width: 2
+                                            },
+                                            xaxis: {
+                                                type: 'datetime',
+                                                categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                                            },
+                                            tooltip: {
+                                                x: {
+                                                    format: 'dd/MM/yy HH:mm'
+                                                },
+                                            }
+                                        }).render();
+                                    });
+                                </script>
+                                <!-- End Line Chart -->
+
+                            </div>
+
+                        </div>
+                    </div><!-- End Reports -->
+                    <!-- Recent Sales -->
+                    <div class="col-12">
+                        <div class="card recent-sales overflow-auto">
+
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>تصفية</h6>
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="#">هذا اليوم</a></li>
+                                    <li><a class="dropdown-item" href="#">هذا الشهر</a></li>
+                                    <li><a class="dropdown-item" href="#">هذه السنة</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">احدث الكتب <span>| هذا اليوم</span></h5>
+
+                                <table class="table table-borderless datatable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">الموظف</th>
+                                            <th scope="col">الموضوع</th>
+                                            <th scope="col">الموظفين</th>
+                                            <th scope="col">الحالة</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row"><a href="#">#2457</a></th>
+                                            <td>احمد محمد علي</td>
+                                            <td><a href="#" class="text-primary">كتاب تأييد / علي احمد جاسم</a></td>
+                                            <td>1</td>
+                                            <td><span class="badge bg-success">مصادق</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><a href="#">#2147</a></th>
+                                            <td>قاسم لؤي اكرم</td>
+                                            <td><a href="#" class="text-primary">إضافة الخدمة الوقتية</a></td>
+                                            <td>44</td>
+                                            <td><span class="badge bg-warning">إنتظار</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><a href="#">#2049</a></th>
+                                            <td>سهى علي طه</td>
+                                            <td><a href="#" class="text-primary">احصائية الدرجة الرابعة</a></td>
+                                            <td>876</td>
+                                            <td><span class="badge bg-success">مصادق</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><a href="#">#2644</a></th>
+                                            <td>احمد محمد علي</td>
+                                            <td><a href="#" class="text-primar">مواظبة شهر6</a></td>
+                                            <td>33</td>
+                                            <td><span class="badge bg-danger">مرفوض</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><a href="#">#2644</a></th>
+                                            <td>احمد محمد علي</td>
+                                            <td><a href="#" class="text-primary">مكافأة الشعبة</a></td>
+                                            <td>24</td>
+                                            <td><span class="badge bg-success">مصادق</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div><!-- End Recent Sales -->
+                    <!-- Top Selling -->
+                    <div class="col-12">
+                        <div class="card top-selling overflow-auto">
+
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>تصفية</h6>
+                                    </li>
+
+                                    <li><a class="dropdown-item" href="#">هذا اليوم</a></li>
+                                    <li><a class="dropdown-item" href="#">هذا الشهر</a></li>
+                                    <li><a class="dropdown-item" href="#">هذه السنة</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body pb-0">
+                                <h5 class="card-title">أهم الكتب <span>| هذا الشهر</span></h5>
+
+                                <table class="table table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">صورة</th>
+                                            <th scope="col">الموضوع</th>
+                                            <th scope="col">الموظفين</th>
+                                            <th scope="col">التاريخ</th>
+                                            <th scope="col">الوحدة</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="thumbnail-tooltip">
+                                                    <a href="#"><img src="~/img/letter1.jpg" alt="" class="thumbnail-img"></a>
+                                                </div>
+                                            </th>
+                                            <td><a href="#" class="text-primary fw-bold">محضر ترقيات 6/ 2024</a></td>
+                                            <td>254</td>
+                                            <td class="fw-bold">2024/6/20</td>
+                                            <td>وحدة الترقيات</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="thumbnail-tooltip">
+                                                    <a href="#"><img src="~/img/letter2.jpg" alt="" class="thumbnail-img"></a>
+                                                </div>
+                                            </th>
+                                            <td><a href="#" class="text-primary fw-bold">محضر ترقيات 5/ 2024</a></td>
+                                            <td>342</td>
+                                            <td class="fw-bold">2024/6/20</td>
+                                            <td>وحدة الترقيات</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="thumbnail-tooltip">
+                                                    <a href="#"><img src="~/img/letter4.jpg" alt="" class="thumbnail-img"></a>
+                                                </div>
+                                            </th>
+                                            <td><a href="#" class="text-primary fw-bold">محضر ترقيات 4/ 2024</a></td>
+                                            <td>221</td>
+                                            <td class="fw-bold">2024/6/20</td>
+                                            <td>وحدة الترقيات</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="thumbnail-tooltip">
+                                                    <a href="#"><img src="~/img/letter3.jpg" alt="" class="thumbnail-img"></a>
+                                                </div>
+                                            </th>
+                                            <td><a href="#" class="text-primary fw-bold">تعديل ضوابط ترقية الدرجة الأولى</a></td>
+                                            <td>44</td>
+                                            <td class="fw-bold">2024/6/20</td>
+                                            <td>وحدة الترقيات</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="thumbnail-tooltip">
+                                                    <a href="#"><img src="~/img/letter5.jpg" alt="" class="thumbnail-img"></a>
+                                                </div>
+                                            </th>
+                                            <td><a href="#" class="text-primary fw-bold">محضر ترقيات 3/ 2024</a></td>
+                                            <td>266</td>
+                                            <td class="fw-bold">2024/6/20</td>
+                                            <td>وحدة الترقيات</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div><!-- End Top Selling -->
+
+                </div>
+            </div><!-- End Left side columns -->
+            <!-- Right side columns -->
+            <div class="col-lg-4">
+
+                <!-- Recent Activity -->
+                <div class="card">
+                    <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li class="dropdown-header text-start">
+                                <h6>تصفية</h6>
+                            </li>
+
+                            <li><a class="dropdown-item" href="#">هذا اليوم</a></li>
+                            <li><a class="dropdown-item" href="#">هذا الشهر</a></li>
+                            <li><a class="dropdown-item" href="#">هذه السنة</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">آخر الفعاليات <span>| هذا اليوم</span></h5>
+
+                        <div class="activity">
+
+                            <div class="activity-item d-flex">
+                                <div class="activite-label">32 دقيقة</div>
+                                <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                                <div class="activity-content">
+                                    كتاب وارد من <a href="#" class="fw-bold text-dark">شعبة الاحصاء</a> يبي
+                                </div>
+                            </div><!-- End activity item-->
+
+                            <div class="activity-item d-flex">
+                                <div class="activite-label">56 دقيقة</div>
+                                <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+                                <div class="activity-content">
+                                   تأخر في إجابة الكتاب المرقم 2540 ، قسم التدقيق
+                                </div>
+                            </div><!-- End activity item-->
+
+                            <div class="activity-item d-flex">
+                                <div class="activite-label">2 ساعة</div>
+                                <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
+                                <div class="activity-content">
+                                    تم توقيع المطالعة #4323 من قبل مدير القسم
+                                </div>
+                            </div><!-- End activity item-->
+
+                            <div class="activity-item d-flex">
+                                <div class="activite-label">1 يوم</div>
+                                <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
+                                <div class="activity-content">
+                                    تم إرسال محضر ترقيات <a href="#" class="fw-bold text-dark">2024/7</a> للمصادقة
+                                </div>
+                            </div><!-- End activity item-->
+
+                            <div class="activity-item d-flex">
+                                <div class="activite-label">2 يوم</div>
+                                <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
+                                <div class="activity-content">
+                                    تمت استلام رسالة من شعبة الاجازات
+                                </div>
+                            </div><!-- End activity item-->
+
+                            <div class="activity-item d-flex">
+                                <div class="activite-label">4 اسبوع</div>
+                                <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
+                                <div class="activity-content">
+                                    تمت توقيع مطالعة للوزارة من قبل مدير الهيأة
+                                </div>
+                            </div><!-- End activity item-->
+
+                        </div>
+
+                    </div>
+                </div><!-- End Recent Activity -->
+                <!-- Budget Report -->
+                <div class="card">
+                    <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li class="dropdown-header text-start">
+                                <h6>تصفية</h6>
+                            </li>
+
+                            <li><a class="dropdown-item" href="#">هذا اليوم</a></li>
+                            <li><a class="dropdown-item" href="#">هذا الشهر</a></li>
+                            <li><a class="dropdown-item" href="#">هذه السنة</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card-body pb-0">
+                        <h5 class="card-title">تقرير أداء الشعبة <span>| هذا الشهر</span></h5>
+
+                        <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                                var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
+                                    legend: {
+                                        data: ['Allocated Budget', 'Actual Spending']
+                                    },
+                                    radar: {
+                                        // shape: 'circle',
+                                        indicator: [{
+                                            name: 'الكتب الصادرة',
+                                            max: 6500
+                                        },
+                                        {
+                                            name: 'المكافآت',
+                                            max: 16000
+                                        },
+                                        {
+                                            name: 'المطالعات',
+                                            max: 30000
+                                        },
+                                        {
+                                            name: 'المذكرات',
+                                            max: 38000
+                                        },
+                                        {
+                                            name: 'الترقيات',
+                                            max: 52000
+                                        },
+                                        {
+                                            name: 'الكتب الواردة',
+                                            max: 25000
+                                        }
+                                        ]
+                                    },
+                                    series: [{
+                                        name: 'Budget vs spending',
+                                        type: 'radar',
+                                        data: [{
+                                            value: [4200, 3000, 20000, 35000, 50000, 18000],
+                                            name: 'Allocated Budget'
+                                        },
+                                        {
+                                            value: [5000, 14000, 28000, 26000, 42000, 21000],
+                                            name: 'Actual Spending'
+                                        }
+                                        ]
+                                    }]
+                                });
+                            });
+                        </script>
+
+                    </div>
+                </div><!-- End Budget Report -->
+                <!-- Website Traffic -->
+                <div class="card">
+                    <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li class="dropdown-header text-start">
+                                <h6>تصفية</h6>
+                            </li>
+
+                            <li><a class="dropdown-item" href="#">هذا اليوم</a></li>
+                            <li><a class="dropdown-item" href="#">هذا الشهر</a></li>
+                            <li><a class="dropdown-item" href="#">هذه السنة</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card-body pb-0">
+                        <h5 class="card-title">تغذية البيانات <span>| هذا اليوم</span></h5>
+
+                        <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                                echarts.init(document.querySelector("#trafficChart")).setOption({
+                                    tooltip: {
+                                        trigger: 'item'
+                                    },
+                                    legend: {
+                                        top: '5%',
+                                        left: 'center'
+                                    },
+                                    series: [{
+                                        name: 'التفاصيل',
+                                        type: 'pie',
+                                        radius: ['40%', '70%'],
+                                        avoidLabelOverlap: false,
+                                        label: {
+                                            show: false,
+                                            position: 'center'
+                                        },
+                                        emphasis: {
+                                            label: {
+                                                show: true,
+                                                fontSize: '18',
+                                                fontWeight: 'bold'
+                                            }
+                                        },
+                                        labelLine: {
+                                            show: false
+                                        },
+                                        data: [{
+                                            value: 8,
+                                            name: 'الدورات'
+                                        },
+                                        {
+                                            value: 16,
+                                            name: 'كتب الشكر'
+                                        },
+                                        {
+                                            value: 3,
+                                            name: 'العقوبات'
+                                        },
+                                        {
+                                            value: 6,
+                                            name: 'ورش العمل'
+                                        },
+                                        {
+                                            value: 4,
+                                            name: 'متنوعة'
+                                        }
+                                        ]
+                                    }]
+                                });
+                            });
+                        </script>
+
+                    </div>
+                </div><!-- End Website Traffic -->
+                <!-- News & Updates Traffic -->
+                <div class="card">
+                    <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li class="dropdown-header text-start">
+                                <h6>تصفية</h6>
+                            </li>
+
+                            <li><a class="dropdown-item" href="#">هذا اليوم</a></li>
+                            <li><a class="dropdown-item" href="#">هذا الشهر</a></li>
+                            <li><a class="dropdown-item" href="#">هذه السنة</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card-body pb-0">
+                        <h5 class="card-title">آخر الأخبار والتحديثات <span>| هذا اليوم</span></h5>
+
+                        <div class="news">
+                            <div class="post-item clearfix">
+                                <img src="~/img/news-1.jpg" alt="">
+                                <h4><a href="#">تحديث طريقة استخراج التقارير</a></h4>
+                                <p>نظرا لما تتطلبه هذه المرحلة من التطبيق من إيجاد سبل بديلة لتسهيل عملية...</p>
+                            </div>
+
+                            <div class="post-item clearfix">
+                                <img src="~/img/news-2.jpg" alt="">
+                                <h4><a href="#">كيف يمكنك تحصين حسابك</a></h4>
+                                <p>فيما يلي التدابير اللازمة لتحصين حسابك الالكتروني...</p>
+                            </div>
+
+                            <div class="post-item clearfix">
+                                <img src="~/img/news-3.jpg" alt="">
+                                <h4><a href="#">ربط مجموعة أقسام منطقة كيوان</a></h4>
+                                <p>يسرنا زف خبر ربط مجموعة أقسام منطقة كيوان بالنظام مما سيسهم في...</p>
+                            </div>
+
+                            <div class="post-item clearfix">
+                                <img src="~/img/news-4.jpg" alt="">
+                                <h4><a href="#">ورشة عمل تدريبية على نظام NorthStorm ERP</a></h4>
+                                <p>تقيم كوادرنا التقنية ورشة عمل تدريبية على كيفية اتقان العمل على...</p>
+                            </div>
+
+                            <div class="post-item clearfix">
+                                <img src="~/img/news-5.jpg" alt="">
+                                <h4><a href="#">فتح قناة تعليمية</a></h4>
+                                <p>تم فتح قناة تعليمية على موقع YouTube.com لتسهيل وصول كوادر...</p>
+                            </div>
+
+                        </div><!-- End sidebar recent posts-->
+
+                    </div>
+                </div><!-- End News & Updates -->
+
+            </div><!-- End Right side columns -->
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
