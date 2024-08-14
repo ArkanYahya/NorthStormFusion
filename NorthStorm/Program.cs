@@ -8,6 +8,8 @@ using System.Security.Policy;
 using Microsoft.AspNetCore.Authentication;
 using NorthStorm.Interfaces.Classifications;
 using NorthStorm.Repositories.Classifications;
+using NorthStorm.Interfaces.Tmp;
+using NorthStorm.Repositories.Tmp;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<NorthStormContext>(options =>
@@ -44,6 +46,13 @@ builder.Services.AddScoped<IJobTransfer, JobTransferRepo>();
 builder.Services.AddScoped<ILevel, LevelRepo>();
 builder.Services.AddScoped<ILocation, LocationRepo>();
 builder.Services.AddScoped<IRecruitment, RecruitmentRepo>();
+
+
+builder.Services.AddScoped<ITmpAppreciation, TmpAppreciationRepo>();
+builder.Services.AddScoped<ITmpBonus, TmpBonusRepo>();
+builder.Services.AddScoped<ITmpLeave, TmpLeaveRepo>();
+builder.Services.AddScoped<ITmpLeaveRequest, TmpLeaveRequestRepo>();
+builder.Services.AddScoped<ITmpPromotion, TmpPromotionRepo>();
 
 
 // اضافة

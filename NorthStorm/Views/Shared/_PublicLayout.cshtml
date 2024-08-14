@@ -68,8 +68,10 @@
 
                 <nav id="navmenu" class="navmenu">
                     <ul>
-                        <li><a asp-controller="PublicHomepage" asp-action="Index" class="@(HttpContextAccessor.HttpContext.Request.Path == "/" ? "active" : "")">الرئيسية<br></a></li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://script.google.com/macros/s/AKfycbwRajKcDMMnFYWbXClZvNPopCTDYYjvuEHTrZopc0ibXIXCabtHwHo6rkJ9LmEwz7z_/exec" target="_blank">بوابة النار الأزلية</a>
+                        </li>
+@*                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle @(HttpContextAccessor.HttpContext.Request.Path.ToString().EndsWith("Services") ? "active" : "")" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 الخدمات الوظيفية
                             </a>
@@ -79,7 +81,7 @@
                                 <li><a class="dropdown-item @(HttpContextAccessor.HttpContext.Request.Path == "/PublicHomepage/Promotion_Services" ? "active" : "")" asp-controller="PublicHomepage" asp-action="Promotion_Services">موعد الترقية القادمة</a></li>
                                 <li><a class="dropdown-item @(HttpContextAccessor.HttpContext.Request.Path == "/PublicHomepage/Bonus_Services" ? "active" : "")" asp-controller="PublicHomepage" asp-action="Bonus_Services">موعد العلاوة القادمة</a></li>
                             </ul>
-                        </li>
+                        </li> *@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle @(HttpContextAccessor.HttpContext.Request.Path.ToString().EndsWith("Entertain") ? "active" : "")" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 الخدمات الترفيهية

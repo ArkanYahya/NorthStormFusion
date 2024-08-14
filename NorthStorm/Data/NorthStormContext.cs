@@ -40,6 +40,13 @@ namespace NorthStorm.Data
         public DbSet<EmployeeJobTitle> EmployeeJobTitles { get; set; }
         public DbSet<LevelClassification> LevelClassifications { get; set; }
         
+        
+        public DbSet<TmpAppreciation> TmpAppreciations{ get; set; }
+        public DbSet<TmpBonus> TmpBonuses { get; set; }
+        public DbSet<TmpLeave> TmpLeaves{ get; set; }
+        public DbSet<TmpLeaveRequest> TmpLeaveRequests { get; set; }
+        public DbSet<TmpPromotion> TmpPromotions { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Level>()
