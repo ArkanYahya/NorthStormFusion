@@ -3,6 +3,7 @@
     @using NorthStorm.Models.ViewModels;
 
 @{
+    Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
     string pageTitle = "العناوين الوظيفية";
     ViewData["Title"] = pageTitle + " / " + "شجرة العناوين";
     SortModel sortModel = (SortModel)ViewData["sortModel"];

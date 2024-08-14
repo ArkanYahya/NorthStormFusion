@@ -2,6 +2,7 @@
 
     @using NorthStorm.Models.ViewModels;
 @{
+    Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
     string pageTitle = "تصنيفات الهيكل التنظيمي";
     ViewData["Title"] = pageTitle;
     SortModel sortModel = (SortModel)ViewData["sortModel"];
