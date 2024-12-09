@@ -42,13 +42,6 @@ namespace NorthStorm.Data
         public DbSet<ThankClassification> ThankClassifications { get; set; }            // التشكرات
 
 
-        public DbSet<TmpAppreciation> TmpAppreciations { get; set; }
-        public DbSet<TmpBonus> TmpBonuses { get; set; }
-        public DbSet<TmpLeave> TmpLeaves { get; set; }
-        public DbSet<TmpLeaveRequest> TmpLeaveRequests { get; set; }
-        public DbSet<TmpPromotion> TmpPromotions { get; set; }
-
-
         public DbSet<EducationalInstitution> EducationalInstitutions { get; set; }      // المؤسسات التعليمية
         public DbSet<EducationalInstitutionClassification> EducationalInstituteClassifications { get; set; } // تصنيف المؤسسات التعليمية
         public DbSet<ComptenceClassification> ComptenceClassifications { get; set; }    // تصنيف التخصصات

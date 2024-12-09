@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NorthStorm.Migrations
 {
     /// <inheritdoc />
-    public partial class initialCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -531,77 +531,6 @@ namespace NorthStorm.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ThankClassifications", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TmpAppreciations",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    Cause = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TmpAppreciations", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TmpBonuses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    NextDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TmpBonuses", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TmpLeaveRequests",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    startDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    endtDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TmpLeaveRequests", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TmpLeaves",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    Balance = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TmpLeaves", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TmpPromotions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    NextDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TmpPromotions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -1294,12 +1223,7 @@ namespace NorthStorm.Migrations
                     ShiftId = table.Column<int>(type: "int", nullable: true),
                     StaffClassificationId = table.Column<int>(type: "int", nullable: true),
                     StaffingId = table.Column<int>(type: "int", nullable: true),
-                    ThankAndAppreciationId = table.Column<int>(type: "int", nullable: true),
-                    TmpAppreciationId = table.Column<int>(type: "int", nullable: true),
-                    TmpBonusId = table.Column<int>(type: "int", nullable: true),
-                    TmpLeaveId = table.Column<int>(type: "int", nullable: true),
-                    TmpLeaveRequestId = table.Column<int>(type: "int", nullable: true),
-                    TmpPromotionId = table.Column<int>(type: "int", nullable: true)
+                    ThankAndAppreciationId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1438,31 +1362,6 @@ namespace NorthStorm.Migrations
                         name: "FK_Employees_ThankAndAppreciations_ThankAndAppreciationId",
                         column: x => x.ThankAndAppreciationId,
                         principalTable: "ThankAndAppreciations",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Employees_TmpAppreciations_TmpAppreciationId",
-                        column: x => x.TmpAppreciationId,
-                        principalTable: "TmpAppreciations",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Employees_TmpBonuses_TmpBonusId",
-                        column: x => x.TmpBonusId,
-                        principalTable: "TmpBonuses",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Employees_TmpLeaveRequests_TmpLeaveRequestId",
-                        column: x => x.TmpLeaveRequestId,
-                        principalTable: "TmpLeaveRequests",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Employees_TmpLeaves_TmpLeaveId",
-                        column: x => x.TmpLeaveId,
-                        principalTable: "TmpLeaves",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Employees_TmpPromotions_TmpPromotionId",
-                        column: x => x.TmpPromotionId,
-                        principalTable: "TmpPromotions",
                         principalColumn: "Id");
                 });
 
@@ -1864,31 +1763,6 @@ namespace NorthStorm.Migrations
                 column: "ThankAndAppreciationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_TmpAppreciationId",
-                table: "Employees",
-                column: "TmpAppreciationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Employees_TmpBonusId",
-                table: "Employees",
-                column: "TmpBonusId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Employees_TmpLeaveId",
-                table: "Employees",
-                column: "TmpLeaveId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Employees_TmpLeaveRequestId",
-                table: "Employees",
-                column: "TmpLeaveRequestId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Employees_TmpPromotionId",
-                table: "Employees",
-                column: "TmpPromotionId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_EmployeeSalary_SalariesId",
                 table: "EmployeeSalary",
                 column: "SalariesId");
@@ -2191,21 +2065,6 @@ namespace NorthStorm.Migrations
 
             migrationBuilder.DropTable(
                 name: "ThankAndAppreciations");
-
-            migrationBuilder.DropTable(
-                name: "TmpAppreciations");
-
-            migrationBuilder.DropTable(
-                name: "TmpBonuses");
-
-            migrationBuilder.DropTable(
-                name: "TmpLeaveRequests");
-
-            migrationBuilder.DropTable(
-                name: "TmpLeaves");
-
-            migrationBuilder.DropTable(
-                name: "TmpPromotions");
 
             migrationBuilder.DropTable(
                 name: "CreditedServiceClassifications");

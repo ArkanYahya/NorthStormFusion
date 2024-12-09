@@ -38,6 +38,7 @@ namespace NorthStorm.Models
 
 
         #endregion
+
         #region Foreign Key
         //[Display(Name = "تصنيف الغياب")]
         //public int? AbsenceClassificationId { get; set; }

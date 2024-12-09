@@ -1,16 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NorthStorm.Data;
-using Microsoft.Extensions.DependencyInjection;
 using NorthStorm.Interfaces;
 using NorthStorm.Repositories;
-using System.Security.Policy;
-using Microsoft.AspNetCore.Authentication;
 using NorthStorm.Interfaces.Classifications;
 using NorthStorm.Repositories.Classifications;
-using NorthStorm.Models;
-using NorthStorm.Models.Assistants;
-using NorthStorm.Models.Classifications;
 using NorthStorm.Interfaces.Assistants;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -121,15 +115,15 @@ else
 
 // اضافة
 // create database if doesn't exist
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
 
-    var context = services.GetRequiredService<NorthStormContext>();
-    // I used Migrate instead of EnsureCreated to ensure future maigrate update
-    context.Database.EnsureCreated();
-    DbInitializer.Initialize(context);
-}
+//    var context = services.GetRequiredService<NorthStormContext>();
+//    // I used Migrate instead of EnsureCreated to ensure future maigrate update
+//    //context.Database.EnsureCreated();
+//    //DbInitializer.Initialize(context);
+//}
 
 //if (env.IsDevelopment())
 //{

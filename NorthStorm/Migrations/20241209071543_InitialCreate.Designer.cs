@@ -12,8 +12,8 @@ using NorthStorm.Data;
 namespace NorthStorm.Migrations
 {
     [DbContext(typeof(NorthStormContext))]
-    [Migration("20241209054633_initialCreate")]
-    partial class initialCreate
+    [Migration("20241209071543_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1376,21 +1376,6 @@ namespace NorthStorm.Migrations
                     b.Property<int?>("ThankAndAppreciationId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TmpAppreciationId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TmpBonusId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TmpLeaveId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TmpLeaveRequestId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TmpPromotionId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AbsenceId");
@@ -1446,16 +1431,6 @@ namespace NorthStorm.Migrations
                     b.HasIndex("StatusId");
 
                     b.HasIndex("ThankAndAppreciationId");
-
-                    b.HasIndex("TmpAppreciationId");
-
-                    b.HasIndex("TmpBonusId");
-
-                    b.HasIndex("TmpLeaveId");
-
-                    b.HasIndex("TmpLeaveRequestId");
-
-                    b.HasIndex("TmpPromotionId");
 
                     b.ToTable("Employees");
                 });
@@ -2049,104 +2024,6 @@ namespace NorthStorm.Migrations
                     b.ToTable("ThankAndAppreciations");
                 });
 
-            modelBuilder.Entity("NorthStorm.Models.TmpAppreciation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Cause")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TmpAppreciations");
-                });
-
-            modelBuilder.Entity("NorthStorm.Models.TmpBonus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("NextDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TmpBonuses");
-                });
-
-            modelBuilder.Entity("NorthStorm.Models.TmpLeave", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Balance")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TmpLeaves");
-                });
-
-            modelBuilder.Entity("NorthStorm.Models.TmpLeaveRequest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("endtDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("startDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TmpLeaveRequests");
-                });
-
-            modelBuilder.Entity("NorthStorm.Models.TmpPromotion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("NextDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TmpPromotions");
-                });
-
             modelBuilder.Entity("CertificateEmployee", b =>
                 {
                     b.HasOne("NorthStorm.Models.Assistants.Certificate", null)
@@ -2493,26 +2370,6 @@ namespace NorthStorm.Migrations
                     b.HasOne("NorthStorm.Models.ThankAndAppreciation", null)
                         .WithMany("Employees")
                         .HasForeignKey("ThankAndAppreciationId");
-
-                    b.HasOne("NorthStorm.Models.TmpAppreciation", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("TmpAppreciationId");
-
-                    b.HasOne("NorthStorm.Models.TmpBonus", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("TmpBonusId");
-
-                    b.HasOne("NorthStorm.Models.TmpLeave", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("TmpLeaveId");
-
-                    b.HasOne("NorthStorm.Models.TmpLeaveRequest", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("TmpLeaveRequestId");
-
-                    b.HasOne("NorthStorm.Models.TmpPromotion", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("TmpPromotionId");
 
                     b.Navigation("Recruitment");
 
@@ -2933,31 +2790,6 @@ namespace NorthStorm.Migrations
                 });
 
             modelBuilder.Entity("NorthStorm.Models.ThankAndAppreciation", b =>
-                {
-                    b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("NorthStorm.Models.TmpAppreciation", b =>
-                {
-                    b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("NorthStorm.Models.TmpBonus", b =>
-                {
-                    b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("NorthStorm.Models.TmpLeave", b =>
-                {
-                    b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("NorthStorm.Models.TmpLeaveRequest", b =>
-                {
-                    b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("NorthStorm.Models.TmpPromotion", b =>
                 {
                     b.Navigation("Employees");
                 });
