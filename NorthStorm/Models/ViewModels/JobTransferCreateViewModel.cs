@@ -3,7 +3,6 @@ using NorthStorm.Models.Assistants;
 
 namespace NorthStorm.Models.ViewModels
 {
-
 #warning try to use inheritance for shared properties
     public class JobTransferCreateViewModel
     {
@@ -18,5 +17,4 @@ namespace NorthStorm.Models.ViewModels
         public Level DestinationLevel { get; set; }
         public List<int> EmployeeIds { get; set; }
     }
-
 }

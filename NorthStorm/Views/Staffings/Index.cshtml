@@ -1,0 +1,247 @@
+﻿@model IEnumerable<NorthStorm.Models.Staffing>
+
+@using NorthStorm.Models.ViewModels;
+
+@{
+    Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+    string pageTitle = "الملاك الوظيفي";
+    ViewData["Title"] = pageTitle;
+    SortModel sortModel = (SortModel)ViewData["sortModel"];
+    PagerModel pager = ViewBag.Pager;
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p dir="ltr">
+    <a asp-action="Create" class="h5">
+        إنشاء قيد
+    </a>
+</p>
+
+<div class="card bg-light mb-3">
+    <div class="card-header">
+        <partial name="_topBar" model="@pager" />
+    </div>
+    <table class="table card-body">
+        <thead>
+            <tr>
+                <th>
+                    <i class="@sortModel.GetColumn("ReferenceNo").SortIcon" arial-hidden="true"></i>
+                    <a asp-action="Index"
+                       asp-route-sortExpression="@sortModel.GetColumn("ReferenceNo").SortExpression"
+                       asp-route-pg="@pager.CurrentPage"
+                       asp-route-pageSize="@pager.PageSize"
+                       asp-route-SearchText="@ViewData["SearchText"]">
+                        @Html.DisplayNameFor(model => model.ReferenceNo)
+                    </a>
+                </th>
+                <th>
+                    <i class="@sortModel.GetColumn("ReferenceDate").SortIcon" arial-hidden="true"></i>
+                    <a asp-action="Index"
+                       asp-route-sortExpression="@sortModel.GetColumn("ReferenceDate").SortExpression"
+                       asp-route-pg="@pager.CurrentPage"
+                       asp-route-pageSize="@pager.PageSize"
+                       asp-route-SearchText="@ViewData["SearchText"]">
+                        @Html.DisplayNameFor(model => model.ReferenceDate)
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StaffingJobTitleId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StaffingCount)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.StaffingUnitId)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeCounted)
+                </th>
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.VacantStaffing)
+                </th>
+
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeCount)
+                </th>
+
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                string selectedRow = "";
+                if (item.Id == (int?)ViewData["StaffingId"])
+                {
+                    selectedRow = "table-success";
+                }
+                <tr class="@selectedRow">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReferenceNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReferenceDate)
+                    </td>
+
+                    <td>
+                        @(item.StaffingJobTitle == null
+                            ? null
+                            : @Html.DisplayFor(modelItem => item.StaffingJobTitle.Name)
+                            )
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StaffingCount)
+                    </td>
+
+                    <td>
+                        @(item.StaffingUnit == null
+                            ? null
+                            : @Html.DisplayFor(modelItem => item.StaffingUnit.Name)
+                            )
+                    </td>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeCounted)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VacantStaffing)
+                    </td>
+
+
+
+                    <td>
+                        @(item.Employees == null
+                            ? null
+                            : @Html.DisplayFor(modelItem => item.Employees.Count)
+                            )
+                    </td>
+
+
+                  
+
+                    <td>
+                        <a asp-action="Index"
+                           asp-route-selectedId="@item.Id"
+                           asp-route-pg="@pager.CurrentPage"
+                           asp-route-pageSize="@pager.PageSize"
+                           asp-route-SearchText="@ViewData["SearchText"]"
+                           asp-route-sortExpression="@sortModel.SortedExpression">
+
+                            <span class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-eye" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="عرض التفاصيل"></i>
+                            </span>
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@item.Id">
+                            <span class="btn btn-sm btn-outline-warning">
+                                <i class="fa fa-edit" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="تعديل الأمر"></i>
+                            </span>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">
+                            <span class="btn btn-sm btn-outline-danger">
+                                <i class="fa fa-trash" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="حذف الأمر"></i>
+                            </span>
+                        </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="card-footer" style="height:50px">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@{
+    int? x = (int?)ViewData["StaffingId"];
+
+    @if (x != null)
+    {
+        int index;
+        index = (int)ViewData["StaffingId"];
+        if (Model.Single(x => x.Id == index).Employees != null)
+        {
+            if (Model.Single(x => x.Id == index).Employees.Count > 0)
+            {
+                <div class="card bg-light mb-3">
+                    <div class="card-header">التفاصيل</div>
+                    <table class="table card-body">
+                        <thead>
+                            <tr>
+                                <th>ت</th>
+                                <th>رقم الموظف</th>
+                                <th>الاسم الكامل</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 0;
+                            }
+                            @foreach (var item in Model.Single(x => x.Id == index).Employees)
+                            {
+                                ++i;
+                                <tr>
+                                    <td>
+                                        @i
+                                    </td>
+                                    <td>
+                                        @item.Id
+                                    </td>
+                                    <td>
+                                        @item.FullName
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                    <div class="card-footer">
+                        <br />
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="card bg-light mb-3">
+                    <div class="card-header">التفاصيل</div>
+                    <table class="table card-body">
+                        <div class="d-flex justify-content-center text-danger">
+                            <br />
+                            <span>
+                                <br />
+                                لا يوجد تفاصيل
+                            </span>
+                        </div>
+                    </table>
+                    <div class="card-footer">
+                        <br />
+                    </div>
+                </div>
+
+            }
+        }
+    }
+
+}
+
+

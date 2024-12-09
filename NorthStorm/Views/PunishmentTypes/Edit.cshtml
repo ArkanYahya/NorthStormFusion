@@ -1,0 +1,78 @@
+﻿@model NorthStorm.Models.Classifications.PunishmentClassification
+
+
+@{
+	Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+	ViewData["Title"] = "تحديث القيد";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p>
+	<span class="text-danger h4">
+	</span>
+</p>
+
+<div class="card bg-light mb-3">
+	<div class="card-header">بيانات القيد</div>
+	<form asp-action="Edit" class="card-body">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<input type="hidden" asp-for="Id" />
+		<div class="row col-md-12">
+
+
+			<div class="form-group col-md-2">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-2">
+				<label asp-for="PunishmentSeverity" class="control-label"></label>
+				<input asp-for="PunishmentSeverity" class="form-control" />
+				<span asp-validation-for="PunishmentSeverity" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-2">
+				<label asp-for="PunishmentEffect" class="control-label"></label>
+				<input asp-for="PunishmentEffect" class="form-control" />
+				<span asp-validation-for="PunishmentEffect" class="text-danger"></span>
+			</div>
+			</<div>
+
+
+				<div class="row col-md-12">
+					<div class="form-group col-md-10">
+						<label asp-for="PunishmentWriting" class="control-label"></label>
+						<input asp-for="PunishmentWriting" class="form-control" />
+						<span asp-validation-for="PunishmentWriting" class="text-danger"></span>
+					</div>
+
+
+			
+				
+				</<div>
+
+					<div class="form-group col-md-2 align-self-end text-md-center">
+						<input type="submit" value="حفظ" class="btn btn-primary w-75" />
+					</div>
+				</div>
+
+	</form>
+	<div class="card-footer">
+		<br />
+	</div>
+</div>
+
+<div>
+	<a asp-action="Index">إلغاء</a>
+</div>
+
+@section Scripts {
+	@{
+
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+
+}

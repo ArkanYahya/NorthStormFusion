@@ -1,0 +1,101 @@
+﻿@model NorthStorm.Models.Assistants.Certificate
+
+@{
+	Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+	ViewData["Title"] = "قيد جديد";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+
+<div class="card bg-light mb-3">
+	<div class="card-header">بيانات القيد</div>
+	<form asp-action="Create" class="card-body">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<input type="hidden" asp-for="Id" />
+
+
+		<div class="row col-md-12">
+			<div class="form-group col-md-2">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-2">
+				<label asp-for="InflueritialCertificate" class="control-label"></label>
+				<input asp-for="InflueritialCertificate" class="form-control" />
+				<span asp-validation-for="InflueritialCertificate" class="text-danger"></span>
+			</div>
+
+		</div>
+
+		<div class="row col-md-12">
+			<div class="form-group col-md-2">
+				<label asp-for="GradeStart" class="control-label"></label>
+				<input asp-for="GradeStart" class="form-control" />
+				<span asp-validation-for="GradeStart" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="StageStart" class="control-label"></label>
+				<input asp-for="StageStart" class="form-control" />
+				<span asp-validation-for="StageStart" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-2">
+				<label asp-for="GradeEnd" class="control-label"></label>
+				<input asp-for="GradeEnd" class="form-control" />
+				<span asp-validation-for="GradeEnd" class="text-danger"></span>
+			</div>
+			
+			<div class="form-group col-md-2">
+				<label asp-for="AllocationPercentage" class="control-label"></label>
+				<input asp-for="AllocationPercentage" class="form-control" />
+				<span asp-validation-for="AllocationPercentage" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-2">
+				<label asp-for="FirstPromotionDuration" class="control-label"></label>
+				<input asp-for="FirstPromotionDuration" class="form-control" />
+				<span asp-validation-for="FirstPromotionDuration" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-2">
+				<label asp-for="CertificateOldCode" class="control-label"></label>
+				<input asp-for="CertificateOldCode" class="form-control" />
+				<span asp-validation-for="CertificateOldCode" class="text-danger"></span>
+			</div>
+
+
+			@* @* 	@* 	@* 	// لترك بقية الخلايا فارغة 3 خلايا والبدء بسطر جديد *@
+
+			@* <div class="form-group col-md-2">
+			</div>
+			<div class="form-group col-md-2">
+			</div>
+			<div class="form-group col-md-2">
+			</div> *@
+
+			<div class="form-group col-md-2 align-self-end text-md-center">
+				<input type="submit" value="حفظ" class="btn btn-primary w-75" />
+			</div>
+		</div>
+	</form>
+	<div class="card-footer">
+		<br />
+
+	</div>
+</div>
+
+
+
+<div>
+	<a asp-action="Index">إلغاء</a>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+	}
+}

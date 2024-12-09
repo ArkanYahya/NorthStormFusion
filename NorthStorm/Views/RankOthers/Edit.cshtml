@@ -1,0 +1,91 @@
+﻿@model NorthStorm.Models.Assistants.RankOther
+
+
+@{
+    Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+    string pageTitle = "الرتبة لترتيب و وضع تميز و توابع لحقول الملفات الاخرى";
+
+    ViewData["Title"] = pageTitle + " / " + "تعديل قيد";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p>
+    <span class="text-danger h4">
+    </span>
+</p>
+
+<form asp-action="Edit">
+    <div class="card bg-light mb-3">
+        <div class="card-header">بيانات القيد</div>
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row col-md-12">
+                <div class="form-group col-md-2">
+                    <label asp-for="RankAsNumber" class="control-label"></label>
+                    <input asp-for="RankAsNumber" class="form-control" />
+                    <span asp-validation-for="RankAsNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label asp-for="RankAsWriting" class="control-label"></label>
+                    <input asp-for="RankAsWriting" class="form-control" />
+                    <span asp-validation-for="RankAsWriting" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label asp-for="RankAsFemale" class="control-label"></label>
+                    <input asp-for="RankAsFemale" class="form-control" />
+                    <span asp-validation-for="RankAsFemale" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label asp-for="RankAsMale" class="control-label"></label>
+                    <input asp-for="RankAsMale" class="form-control" />
+                    <span asp-validation-for="RankAsMale" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label asp-for="RankAsDistinction" class="control-label"></label>
+                    <input asp-for="RankAsDistinction" class="form-control" />
+                    <span asp-validation-for="RankAsDistinction" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label asp-for="RankAsGeneral" class="control-label"></label>
+                    <input asp-for="RankAsGeneral" class="form-control" />
+                    <span asp-validation-for="RankAsGeneral" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-6">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <br />
+
+        </div>
+    </div>
+
+    <div class="row col-md-12">
+        <div class="form-group col-md-2">
+            <a asp-action="Index">إلغاء</a>
+        </div>
+        <div class="form-group col-md-8">
+        </div>
+        <div class="form-group col-md-2">
+            <input type="submit" value="حفظ" class="btn btn-primary w-100" />
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{
+
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

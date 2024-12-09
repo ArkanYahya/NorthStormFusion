@@ -1,0 +1,225 @@
+﻿@model IEnumerable<NorthStorm.Models.Punishment>
+
+@using NorthStorm.Models.ViewModels;
+
+@{
+    Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+    string pageTitle = "العقوبات الوظيفية";
+    ViewData["Title"] = pageTitle;
+    SortModel sortModel = (SortModel)ViewData["sortModel"];
+    PagerModel pager = ViewBag.Pager;
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<div class="row col-md-12">
+    <div class="form-group col-8 ">
+    </div>
+
+    <div class="form-group col-2 " asp-area="" asp-action="Index">
+        <a href="~/Documents/DisciplineLaw.pdf" target="_blank">قانون انضباط موظفي الدولة</a>
+    </div>
+
+    <div class="form-group col-2 ">
+        <a asp-action="Create" class="d-flex justify-content-end h5">
+            إنشاء قيد
+        </a>
+    </div>
+</div>
+
+<div class="card bg-light mb-3">
+
+   
+
+    <div class="card-header">
+        <partial name="_topBar" model="@pager" />
+    </div>
+    <table class="table card-body">
+        <thead>
+            <tr>
+                <th>
+                    <i class="@sortModel.GetColumn("ReferenceNo").SortIcon" arial-hidden="true"></i>
+                    <a asp-action="Index"
+                       asp-route-sortExpression="@sortModel.GetColumn("ReferenceNo").SortExpression"
+                       asp-route-pg="@pager.CurrentPage"
+                       asp-route-pageSize="@pager.PageSize"
+                       asp-route-SearchText="@ViewData["SearchText"]">
+                        @Html.DisplayNameFor(model => model.ReferenceNo)
+                    </a>
+                </th>
+                <th>
+                    <i class="@sortModel.GetColumn("ReferenceDate").SortIcon" arial-hidden="true"></i>
+                    <a asp-action="Index"
+                       asp-route-sortExpression="@sortModel.GetColumn("ReferenceDate").SortExpression"
+                       asp-route-pg="@pager.CurrentPage"
+                       asp-route-pageSize="@pager.PageSize"
+                       asp-route-SearchText="@ViewData["SearchText"]">
+                        @Html.DisplayNameFor(model => model.ReferenceDate)
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subject)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PunishmentReason)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeCount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PunishmentTypeId)
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                string selectedRow = "";
+                if (item.Id == (int?)ViewData["PunishmentId"])
+                {
+                    selectedRow = "table-success";
+                }
+                <tr class="@selectedRow">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReferenceNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReferenceDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subject)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PunishmentReason)
+                    </td>
+                    <td>
+                        @(item.Employees == null
+                            ? null
+                            : @Html.DisplayFor(modelItem => item.Employees.Count)
+                            )
+                    </td>
+                    <td>
+                        @(item.PunishmentType == null
+                            ? null
+                            : @Html.DisplayFor(modelItem => item.PunishmentType.Name)
+                            )
+                    </td>
+                    <td>
+                        <a asp-action="Index"
+                           asp-route-selectedId="@item.Id"
+                           asp-route-pg="@pager.CurrentPage"
+                           asp-route-pageSize="@pager.PageSize"
+                           asp-route-SearchText="@ViewData["SearchText"]"
+                           asp-route-sortExpression="@sortModel.SortedExpression">
+
+                            <span class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-eye" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="عرض التفاصيل"></i>
+                            </span>
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@item.Id">
+                            <span class="btn btn-sm btn-outline-warning">
+                                <i class="fa fa-edit" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="تعديل الأمر"></i>
+                            </span>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">
+                            <span class="btn btn-sm btn-outline-danger">
+                                <i class="fa fa-trash" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="حذف الأمر"></i>
+                            </span>
+                        </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="card-footer" style="height:50px">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@{
+    int? x = (int?)ViewData["PunishmentId"];
+
+    @if (x != null)
+    {
+        int index;
+        index = (int)ViewData["PunishmentId"];
+        if (Model.Single(x => x.Id == index).Employees != null)
+        {
+            if (Model.Single(x => x.Id == index).Employees.Count > 0)
+            {
+                <div class="card bg-light mb-3">
+                    <div class="card-header">التفاصيل</div>
+                    <table class="table card-body">
+                        <thead>
+                            <tr>
+                                <th>ت</th>
+                                <th>رقم الموظف</th>
+                                <th>الاسم الكامل</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 0;
+                            }
+                            @foreach (var item in Model.Single(x => x.Id == index).Employees)
+                            {
+                                ++i;
+                                <tr>
+                                    <td>
+                                        @i
+                                    </td>
+                                    <td>
+                                        @item.Id
+                                    </td>
+                                    <td>
+                                        @item.FullName
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                    <div class="card-footer">
+                        <br />
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="card bg-light mb-3">
+                    <div class="card-header">التفاصيل</div>
+                    <table class="table card-body">
+                        <div class="d-flex justify-content-center text-danger">
+                            <br />
+                            <span>
+                                <br />
+                                لا يوجد تفاصيل
+                            </span>
+                        </div>
+                    </table>
+                    <div class="card-footer">
+                        <br />
+                    </div>
+                </div>
+
+            }
+        }
+    }
+
+}
+
+

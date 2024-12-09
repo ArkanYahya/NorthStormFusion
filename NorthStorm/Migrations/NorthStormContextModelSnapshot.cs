@@ -112,6 +112,43 @@ namespace NorthStorm.Migrations
                     b.ToTable("JobTitleLevel", (string)null);
                 });
 
+            modelBuilder.Entity("NorthStorm.Models.Absence", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AbsenceInDays")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AbsenceReason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EnrollDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OnAbsenceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ReferenceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReferenceNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Absences");
+                });
+
             modelBuilder.Entity("NorthStorm.Models.Assistants.Certificate", b =>
                 {
                     b.Property<int>("Id")
@@ -120,33 +157,40 @@ namespace NorthStorm.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AccurateSpecialization")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Degree")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("GlobalSpecialization")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UniversityId")
-                        .IsRequired()
+                    b.Property<int>("AllocationPercentage")
                         .HasColumnType("int");
 
-                    b.Property<int>("Year")
+                    b.Property<string>("CertificateOldCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FirstPromotionDuration")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GradeEnd")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GradeStart")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InflueritialCertificate")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<int>("StageStart")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UniversityId");
-
                     b.ToTable("Certificates");
                 });
 
-            modelBuilder.Entity("NorthStorm.Models.Assistants.GovernmentalInstitute", b =>
+            modelBuilder.Entity("NorthStorm.Models.Assistants.EducationalInstitution", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,7 +208,7 @@ namespace NorthStorm.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ParentGovernmentalInstituteId")
+                    b.Property<int?>("ParentEducationalInstitutionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -173,9 +217,29 @@ namespace NorthStorm.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.HasIndex("ParentGovernmentalInstituteId");
+                    b.HasIndex("ParentEducationalInstitutionId");
 
-                    b.ToTable("GovernmentalInstitutes");
+                    b.ToTable("EducationalInstitutions");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Assistants.EducationalInstitutionClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rank")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EducationalInstituteClassifications");
                 });
 
             modelBuilder.Entity("NorthStorm.Models.Assistants.Grade", b =>
@@ -191,14 +255,16 @@ namespace NorthStorm.Migrations
 
                     b.Property<string>("GradeAsWriting")
                         .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("GradeNumber")
                         .HasColumnType("int");
 
                     b.Property<int>("MinimumDuration")
                         .HasColumnType("int");
+
+                    b.Property<string>("RankAsFemale")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Stage01")
                         .HasColumnType("int");
@@ -233,7 +299,12 @@ namespace NorthStorm.Migrations
                     b.Property<int>("Stage11")
                         .HasColumnType("int");
 
+                    b.Property<int?>("rankOtherId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("rankOtherId");
 
                     b.ToTable("Grades");
                 });
@@ -295,6 +366,42 @@ namespace NorthStorm.Migrations
                     b.ToTable("Locations");
                 });
 
+            modelBuilder.Entity("NorthStorm.Models.Assistants.RankOther", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("RankAsDistinction")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RankAsFemale")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RankAsGeneral")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RankAsMale")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RankAsNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RankAsWriting")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RankOthers");
+                });
+
             modelBuilder.Entity("NorthStorm.Models.Assistants.State", b =>
                 {
                     b.Property<int>("Id")
@@ -328,6 +435,203 @@ namespace NorthStorm.Migrations
                     b.ToTable("Statuses");
                 });
 
+            modelBuilder.Entity("NorthStorm.Models.Classifications.BeneficiaryClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BeneficiaryClassifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.CareerClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CareerClassifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.CollegeName", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CollegeOldCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CollegeSPSS1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CollegeNames");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.ComptenceClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BaghdadSymbol")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KirkukSymbol")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ComptenceClassifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.CreditedServiceClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsCountedForBouns")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCountedForPromotion")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCountedForRetirement")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CreditedServiceClassifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.DeputyClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DeputyClassifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.DismissClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DismissSPSSCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("StatusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("DismissClassifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.EngilshLanguge", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EngilshLanguges");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.EvaluationClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("BonusEffect")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LowEvaluationLimit")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("MotivationEffect")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PromotionEffect")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("UpperEvaluationLimit")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EvaluationClassifications");
+                });
+
             modelBuilder.Entity("NorthStorm.Models.Classifications.Gender", b =>
                 {
                     b.Property<int>("Id")
@@ -349,6 +653,23 @@ namespace NorthStorm.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genders");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.GeneralAndPrecise", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GeneralAndPrecises");
                 });
 
             modelBuilder.Entity("NorthStorm.Models.Classifications.GovernmentalInstituteClassification", b =>
@@ -374,6 +695,23 @@ namespace NorthStorm.Migrations
                     b.ToTable("GovernmentalInstituteClassifications");
                 });
 
+            modelBuilder.Entity("NorthStorm.Models.Classifications.JobTitleChangeClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("JobTitleChangeClassifications");
+                });
+
             modelBuilder.Entity("NorthStorm.Models.Classifications.JobTitleClassification", b =>
                 {
                     b.Property<int>("Id")
@@ -395,6 +733,46 @@ namespace NorthStorm.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("JobTitleClassifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.LeaveClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("GenderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LeaveIndays")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OtherNotes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("OutSideLaborForce")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("PromotionCharged")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("SalaryCharged")
+                        .HasColumnType("decimal(3, 1)");
+
+                    b.Property<bool>("ServiceCharged")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GenderId");
+
+                    b.ToTable("LeaveClassifications");
                 });
 
             modelBuilder.Entity("NorthStorm.Models.Classifications.LevelClassification", b =>
@@ -446,6 +824,46 @@ namespace NorthStorm.Migrations
                     b.ToTable("LocationClassifications");
                 });
 
+            modelBuilder.Entity("NorthStorm.Models.Classifications.MaritalStatusClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MaritalStatusAllowance")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MaritalStatusSPSS")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MaritalStatusClassifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.MilitaryClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MilitaryClassification");
+                });
+
             modelBuilder.Entity("NorthStorm.Models.Classifications.Nationality", b =>
                 {
                     b.Property<int>("Id")
@@ -467,6 +885,58 @@ namespace NorthStorm.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Nationalities");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.PrivilegeClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ExtendingRetirementAge")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("OtherBenefites")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("PromotionBenefites")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PrivilegeClassifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.PunishmentClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PunishmentEffect")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PunishmentSeverity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PunishmentWriting")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PunishmentTypes");
                 });
 
             modelBuilder.Entity("NorthStorm.Models.Classifications.Race", b =>
@@ -515,16 +985,300 @@ namespace NorthStorm.Migrations
                     b.ToTable("Religions");
                 });
 
+            modelBuilder.Entity("NorthStorm.Models.Classifications.ResponsibleClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResponsiblSPSS1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResponsiblSPSS2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResponsiblityInEnglish")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ResponsiblityPercentage")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ResponsibleClassifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.RewardClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RewardClassifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.ShiftClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShiftClasifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.StaffClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StaffPeriod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StaffClassifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.ThankClassification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ThankSeniority")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ThankClassifications");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Comptence", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ComptenceSPSS")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParentComptenceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassificationId");
+
+                    b.HasIndex("ParentComptenceId");
+
+                    b.ToTable("Comptences");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.CreditedService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CreditedServiceClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreditedServiceForBounsInDays")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreditedServiceForBounsInMonthes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreditedServiceForBounsInYears")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreditedServiceForPromotionInDays")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreditedServiceForPromotionInMonthes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreditedServiceForPromotionInYears")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreditedServiceForRetirementInDays")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreditedServiceForRetirementInMonthes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreditedServiceForRetirementInYears")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreditedServiceInDays")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreditedServiceInMonthes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreditedServiceInYears")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("OnCreditedServiceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ReferenceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReferenceNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UntilDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreditedServiceClassificationId");
+
+                    b.ToTable("CreditedServices");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.DocumintsAndComminication", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CityAddressId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CountryAddressId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EmployeeEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("GovernorateAddressId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HouseNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MobileNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NeighbrohoodAddressId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OilPhoneNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RationCenterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RationCenterNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RationIdNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TownAddressId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityAddressId");
+
+                    b.HasIndex("CountryAddressId");
+
+                    b.HasIndex("GovernorateAddressId");
+
+                    b.HasIndex("NeighbrohoodAddressId");
+
+                    b.HasIndex("RationCenterId");
+
+                    b.HasIndex("TownAddressId");
+
+                    b.ToTable("DocumintsAndComminications");
+                });
+
             modelBuilder.Entity("NorthStorm.Models.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
+                    b.Property<int?>("AbsenceId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("CareerClassificationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CivilNumber")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CreditedServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DismissClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EngilshLangugeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EvaluationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -536,19 +1290,34 @@ namespace NorthStorm.Migrations
                     b.Property<int?>("GenderId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("GeneralAndPreciseId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("GovernmentalInstituteClassificationId")
                         .HasColumnType("int");
 
                     b.Property<string>("IBAN")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("JobPositionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("LeaveId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MaritalStatusClassificationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("MiddleName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("MilitaryClassificationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("MotherFirstName")
                         .HasColumnType("nvarchar(max)");
@@ -562,6 +1331,12 @@ namespace NorthStorm.Migrations
                     b.Property<int?>("NationalityId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PrivilegeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PunishmentId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("RaceId")
                         .HasColumnType("int");
 
@@ -571,11 +1346,32 @@ namespace NorthStorm.Migrations
                     b.Property<int?>("ReligionId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ResponsibleClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RetirementId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ShiftClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ShiftId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StaffClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StaffingId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("StatusId")
                         .HasColumnType("int");
 
                     b.Property<string>("SurName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ThankAndAppreciationId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("TmpAppreciationId")
                         .HasColumnType("int");
@@ -594,11 +1390,37 @@ namespace NorthStorm.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AbsenceId");
+
+                    b.HasIndex("CareerClassificationId");
+
+                    b.HasIndex("CreditedServiceId");
+
+                    b.HasIndex("DismissClassificationId");
+
+                    b.HasIndex("EngilshLangugeId");
+
+                    b.HasIndex("EvaluationId");
+
                     b.HasIndex("GenderId");
+
+                    b.HasIndex("GeneralAndPreciseId");
 
                     b.HasIndex("GovernmentalInstituteClassificationId");
 
+                    b.HasIndex("JobPositionId");
+
+                    b.HasIndex("LeaveId");
+
+                    b.HasIndex("MaritalStatusClassificationId");
+
+                    b.HasIndex("MilitaryClassificationId");
+
                     b.HasIndex("NationalityId");
+
+                    b.HasIndex("PrivilegeId");
+
+                    b.HasIndex("PunishmentId");
 
                     b.HasIndex("RaceId");
 
@@ -606,7 +1428,21 @@ namespace NorthStorm.Migrations
 
                     b.HasIndex("ReligionId");
 
+                    b.HasIndex("ResponsibleClassificationId");
+
+                    b.HasIndex("RetirementId");
+
+                    b.HasIndex("ShiftClassificationId");
+
+                    b.HasIndex("ShiftId");
+
+                    b.HasIndex("StaffClassificationId");
+
+                    b.HasIndex("StaffingId");
+
                     b.HasIndex("StatusId");
+
+                    b.HasIndex("ThankAndAppreciationId");
 
                     b.HasIndex("TmpAppreciationId");
 
@@ -651,6 +1487,119 @@ namespace NorthStorm.Migrations
                     b.HasIndex("JobTitleId");
 
                     b.ToTable("EmployeeJobTitles");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Evaluation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("EvaluationClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EvaluationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EvaluationInNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("JobGradeNumber")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReferenceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReferenceNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SalaryGradeNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StageNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EvaluationClassificationId");
+
+                    b.ToTable("Evaluation");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.GovernmentalInstitute", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParentGovernmentalInstituteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassificationId");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("ParentGovernmentalInstituteId");
+
+                    b.ToTable("GovernmentalInstitutes");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.JobPosition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("DeputyClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReferenceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReferenceNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ResponsibleClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartingFromDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeputyClassificationId");
+
+                    b.HasIndex("ResponsibleClassificationId");
+
+                    b.ToTable("JobPositions");
                 });
 
             modelBuilder.Entity("NorthStorm.Models.JobTitle", b =>
@@ -727,13 +1676,104 @@ namespace NorthStorm.Migrations
                     b.ToTable("JobTransfers");
                 });
 
-            modelBuilder.Entity("NorthStorm.Models.Promotion", b =>
+            modelBuilder.Entity("NorthStorm.Models.Leave", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("EnrollDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("LeaveClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LeaveInDays")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LeaveInMonthes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LeaveInYears")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LeaveReason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OnLeaveDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ReferenceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReferenceNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SupposedEnrollDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LeaveClassificationId");
+
+                    b.ToTable("Leaves");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.NationalCard", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CivilStatusIdNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FamilyIdNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NationalCardNumber")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("NationalIdExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NationalIdReleaseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("PlaceOfBirthId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("PlaceOfBirthId");
+
+                    b.ToTable("NationalCards");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Privilege", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("PrivilegeClassificationId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ReferenceDate")
                         .HasColumnType("datetime2");
@@ -748,7 +1788,73 @@ namespace NorthStorm.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PrivilegeClassificationId");
+
+                    b.ToTable("Privileges");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Promotion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BatchNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrderNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PromotionMinutesYear")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReferenceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReferenceNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
                     b.ToTable("Promotions");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Punishment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("PunishmentReason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PunishmentTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReferenceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReferenceNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PunishmentTypeId");
+
+                    b.ToTable("Punishments");
                 });
 
             modelBuilder.Entity("NorthStorm.Models.Recruitment", b =>
@@ -766,13 +1872,55 @@ namespace NorthStorm.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("StaffClassificationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Subject")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StaffClassificationId");
+
                     b.ToTable("Recruitments");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Retirement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DisengagementDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DismissClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReferenceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReferenceNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("StatusId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DismissClassificationId");
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("Retirements");
                 });
 
             modelBuilder.Entity("NorthStorm.Models.Salary", b =>
@@ -789,6 +1937,113 @@ namespace NorthStorm.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Salary");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Shift", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("EnrollDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ReferenceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReferenceNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ShiftClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ShiftClassificationId");
+
+                    b.ToTable("Shifts");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Staffing", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EmployeeCounted")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReferenceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReferenceNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StaffingCount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StaffingJobTitleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StaffingUnitId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VacantStaffing")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StaffingJobTitleId");
+
+                    b.HasIndex("StaffingUnitId");
+
+                    b.ToTable("Staffings");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.ThankAndAppreciation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ReferenceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReferenceNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ThankAndAppreciationReason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ThankClassificationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ThankSeniority")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ThankClassificationId");
+
+                    b.ToTable("ThankAndAppreciations");
                 });
 
             modelBuilder.Entity("NorthStorm.Models.TmpAppreciation", b =>
@@ -979,36 +2234,34 @@ namespace NorthStorm.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("NorthStorm.Models.Assistants.Certificate", b =>
+            modelBuilder.Entity("NorthStorm.Models.Assistants.EducationalInstitution", b =>
                 {
-                    b.HasOne("NorthStorm.Models.Assistants.GovernmentalInstitute", "University")
-                        .WithMany()
-                        .HasForeignKey("UniversityId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("University");
-                });
-
-            modelBuilder.Entity("NorthStorm.Models.Assistants.GovernmentalInstitute", b =>
-                {
-                    b.HasOne("NorthStorm.Models.Classifications.GovernmentalInstituteClassification", "Classification")
-                        .WithMany()
+                    b.HasOne("NorthStorm.Models.Assistants.EducationalInstitutionClassification", "Classification")
+                        .WithMany("EducationalInstitutions")
                         .HasForeignKey("ClassificationId");
 
                     b.HasOne("NorthStorm.Models.Assistants.Location", "Location")
-                        .WithMany("GovernmentalInstitutes")
+                        .WithMany()
                         .HasForeignKey("LocationId");
 
-                    b.HasOne("NorthStorm.Models.Assistants.GovernmentalInstitute", "ParentGovernmentalInstitute")
-                        .WithMany("ChildGovernmentalInstitutes")
-                        .HasForeignKey("ParentGovernmentalInstituteId");
+                    b.HasOne("NorthStorm.Models.Assistants.EducationalInstitution", "ParentEducationalInstitution")
+                        .WithMany("ChildEducationalInstitutions")
+                        .HasForeignKey("ParentEducationalInstitutionId");
 
                     b.Navigation("Classification");
 
                     b.Navigation("Location");
 
-                    b.Navigation("ParentGovernmentalInstitute");
+                    b.Navigation("ParentEducationalInstitution");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Assistants.Grade", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Assistants.RankOther", "rankOther")
+                        .WithMany()
+                        .HasForeignKey("rankOtherId");
+
+                    b.Navigation("rankOther");
                 });
 
             modelBuilder.Entity("NorthStorm.Models.Assistants.Level", b =>
@@ -1047,19 +2300,152 @@ namespace NorthStorm.Migrations
                     b.Navigation("ParentLocation");
                 });
 
+            modelBuilder.Entity("NorthStorm.Models.Classifications.DismissClassification", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Assistants.Status", "status")
+                        .WithMany()
+                        .HasForeignKey("StatusId");
+
+                    b.Navigation("status");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.LeaveClassification", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Classifications.Gender", "gender")
+                        .WithMany()
+                        .HasForeignKey("GenderId");
+
+                    b.Navigation("gender");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Comptence", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Classifications.ComptenceClassification", "Classification")
+                        .WithMany("Comptences")
+                        .HasForeignKey("ClassificationId");
+
+                    b.HasOne("NorthStorm.Models.Comptence", "ParentComptence")
+                        .WithMany("ChildComptences")
+                        .HasForeignKey("ParentComptenceId");
+
+                    b.Navigation("Classification");
+
+                    b.Navigation("ParentComptence");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.CreditedService", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Classifications.CreditedServiceClassification", "CreditedServiceClassification")
+                        .WithMany()
+                        .HasForeignKey("CreditedServiceClassificationId");
+
+                    b.Navigation("CreditedServiceClassification");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.DocumintsAndComminication", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Assistants.Location", "CityAddress")
+                        .WithMany()
+                        .HasForeignKey("CityAddressId");
+
+                    b.HasOne("NorthStorm.Models.Assistants.Location", "CountryAddress")
+                        .WithMany()
+                        .HasForeignKey("CountryAddressId");
+
+                    b.HasOne("NorthStorm.Models.Assistants.Location", "GovernorateAddress")
+                        .WithMany()
+                        .HasForeignKey("GovernorateAddressId");
+
+                    b.HasOne("NorthStorm.Models.Assistants.Location", "NeighbrohoodAddress")
+                        .WithMany()
+                        .HasForeignKey("NeighbrohoodAddressId");
+
+                    b.HasOne("NorthStorm.Models.Assistants.Location", "RationCenter")
+                        .WithMany()
+                        .HasForeignKey("RationCenterId");
+
+                    b.HasOne("NorthStorm.Models.Assistants.Location", "TownAddress")
+                        .WithMany()
+                        .HasForeignKey("TownAddressId");
+
+                    b.Navigation("CityAddress");
+
+                    b.Navigation("CountryAddress");
+
+                    b.Navigation("GovernorateAddress");
+
+                    b.Navigation("NeighbrohoodAddress");
+
+                    b.Navigation("RationCenter");
+
+                    b.Navigation("TownAddress");
+                });
+
             modelBuilder.Entity("NorthStorm.Models.Employee", b =>
                 {
+                    b.HasOne("NorthStorm.Models.Absence", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("AbsenceId");
+
+                    b.HasOne("NorthStorm.Models.Classifications.CareerClassification", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("CareerClassificationId");
+
+                    b.HasOne("NorthStorm.Models.CreditedService", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("CreditedServiceId");
+
+                    b.HasOne("NorthStorm.Models.Classifications.DismissClassification", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("DismissClassificationId");
+
+                    b.HasOne("NorthStorm.Models.Classifications.EngilshLanguge", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("EngilshLangugeId");
+
+                    b.HasOne("NorthStorm.Models.Evaluation", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("EvaluationId");
+
                     b.HasOne("NorthStorm.Models.Classifications.Gender", "gender")
                         .WithMany("Employees")
                         .HasForeignKey("GenderId");
+
+                    b.HasOne("NorthStorm.Models.Classifications.GeneralAndPrecise", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("GeneralAndPreciseId");
 
                     b.HasOne("NorthStorm.Models.Classifications.GovernmentalInstituteClassification", null)
                         .WithMany("Employees")
                         .HasForeignKey("GovernmentalInstituteClassificationId");
 
+                    b.HasOne("NorthStorm.Models.JobPosition", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("JobPositionId");
+
+                    b.HasOne("NorthStorm.Models.Leave", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("LeaveId");
+
+                    b.HasOne("NorthStorm.Models.Classifications.MaritalStatusClassification", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("MaritalStatusClassificationId");
+
+                    b.HasOne("NorthStorm.Models.Classifications.MilitaryClassification", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("MilitaryClassificationId");
+
                     b.HasOne("NorthStorm.Models.Classifications.Nationality", "nationality")
                         .WithMany("Employees")
                         .HasForeignKey("NationalityId");
+
+                    b.HasOne("NorthStorm.Models.Privilege", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("PrivilegeId");
+
+                    b.HasOne("NorthStorm.Models.Punishment", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("PunishmentId");
 
                     b.HasOne("NorthStorm.Models.Classifications.Race", "race")
                         .WithMany("Employees")
@@ -1073,9 +2459,37 @@ namespace NorthStorm.Migrations
                         .WithMany("Employees")
                         .HasForeignKey("ReligionId");
 
+                    b.HasOne("NorthStorm.Models.Classifications.ResponsibleClassification", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("ResponsibleClassificationId");
+
+                    b.HasOne("NorthStorm.Models.Retirement", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("RetirementId");
+
+                    b.HasOne("NorthStorm.Models.Classifications.ShiftClassification", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("ShiftClassificationId");
+
+                    b.HasOne("NorthStorm.Models.Shift", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("ShiftId");
+
+                    b.HasOne("NorthStorm.Models.Classifications.StaffClassification", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("StaffClassificationId");
+
+                    b.HasOne("NorthStorm.Models.Staffing", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("StaffingId");
+
                     b.HasOne("NorthStorm.Models.Assistants.Status", "status")
                         .WithMany()
                         .HasForeignKey("StatusId");
+
+                    b.HasOne("NorthStorm.Models.ThankAndAppreciation", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("ThankAndAppreciationId");
 
                     b.HasOne("NorthStorm.Models.TmpAppreciation", null)
                         .WithMany("Employees")
@@ -1129,6 +2543,51 @@ namespace NorthStorm.Migrations
                     b.Navigation("JobTitle");
                 });
 
+            modelBuilder.Entity("NorthStorm.Models.Evaluation", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Classifications.EvaluationClassification", "EvaluationClassification")
+                        .WithMany()
+                        .HasForeignKey("EvaluationClassificationId");
+
+                    b.Navigation("EvaluationClassification");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.GovernmentalInstitute", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Classifications.GovernmentalInstituteClassification", "Classification")
+                        .WithMany()
+                        .HasForeignKey("ClassificationId");
+
+                    b.HasOne("NorthStorm.Models.Assistants.Location", "Location")
+                        .WithMany("GovernmentalInstitutes")
+                        .HasForeignKey("LocationId");
+
+                    b.HasOne("NorthStorm.Models.GovernmentalInstitute", "ParentGovernmentalInstitute")
+                        .WithMany("ChildGovernmentalInstitutes")
+                        .HasForeignKey("ParentGovernmentalInstituteId");
+
+                    b.Navigation("Classification");
+
+                    b.Navigation("Location");
+
+                    b.Navigation("ParentGovernmentalInstitute");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.JobPosition", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Classifications.DeputyClassification", "DeputyClassification")
+                        .WithMany()
+                        .HasForeignKey("DeputyClassificationId");
+
+                    b.HasOne("NorthStorm.Models.Classifications.ResponsibleClassification", "ResponsibleClassification")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleClassificationId");
+
+                    b.Navigation("DeputyClassification");
+
+                    b.Navigation("ResponsibleClassification");
+                });
+
             modelBuilder.Entity("NorthStorm.Models.JobTitle", b =>
                 {
                     b.HasOne("NorthStorm.Models.Classifications.JobTitleClassification", "Classification")
@@ -1171,9 +2630,118 @@ namespace NorthStorm.Migrations
                     b.Navigation("DestinationLevel");
                 });
 
-            modelBuilder.Entity("NorthStorm.Models.Assistants.GovernmentalInstitute", b =>
+            modelBuilder.Entity("NorthStorm.Models.Leave", b =>
                 {
-                    b.Navigation("ChildGovernmentalInstitutes");
+                    b.HasOne("NorthStorm.Models.Classifications.LeaveClassification", "LeaveClassification")
+                        .WithMany()
+                        .HasForeignKey("LeaveClassificationId");
+
+                    b.Navigation("LeaveClassification");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.NationalCard", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NorthStorm.Models.Assistants.Location", "PlaceOfBirth")
+                        .WithMany()
+                        .HasForeignKey("PlaceOfBirthId");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("PlaceOfBirth");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Privilege", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Classifications.PrivilegeClassification", "PrivilegeClassification")
+                        .WithMany()
+                        .HasForeignKey("PrivilegeClassificationId");
+
+                    b.Navigation("PrivilegeClassification");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Punishment", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Classifications.PunishmentClassification", "PunishmentType")
+                        .WithMany("Punishments")
+                        .HasForeignKey("PunishmentTypeId");
+
+                    b.Navigation("PunishmentType");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Recruitment", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Classifications.StaffClassification", null)
+                        .WithMany("Recruitment")
+                        .HasForeignKey("StaffClassificationId");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Retirement", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Classifications.DismissClassification", "DismissClassification")
+                        .WithMany()
+                        .HasForeignKey("DismissClassificationId");
+
+                    b.HasOne("NorthStorm.Models.Assistants.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId");
+
+                    b.Navigation("DismissClassification");
+
+                    b.Navigation("Status");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Shift", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Classifications.ShiftClassification", "ShiftClassification")
+                        .WithMany()
+                        .HasForeignKey("ShiftClassificationId");
+
+                    b.Navigation("ShiftClassification");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Staffing", b =>
+                {
+                    b.HasOne("NorthStorm.Models.JobTitle", "StaffingJobTitle")
+                        .WithMany()
+                        .HasForeignKey("StaffingJobTitleId");
+
+                    b.HasOne("NorthStorm.Models.Assistants.Level", "StaffingUnit")
+                        .WithMany()
+                        .HasForeignKey("StaffingUnitId");
+
+                    b.Navigation("StaffingJobTitle");
+
+                    b.Navigation("StaffingUnit");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.ThankAndAppreciation", b =>
+                {
+                    b.HasOne("NorthStorm.Models.Classifications.ThankClassification", "ThankClassification")
+                        .WithMany()
+                        .HasForeignKey("ThankClassificationId");
+
+                    b.Navigation("ThankClassification");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Absence", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Assistants.EducationalInstitution", b =>
+                {
+                    b.Navigation("ChildEducationalInstitutions");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Assistants.EducationalInstitutionClassification", b =>
+                {
+                    b.Navigation("EducationalInstitutions");
                 });
 
             modelBuilder.Entity("NorthStorm.Models.Assistants.Level", b =>
@@ -1192,7 +2760,32 @@ namespace NorthStorm.Migrations
                     b.Navigation("Levels");
                 });
 
+            modelBuilder.Entity("NorthStorm.Models.Classifications.CareerClassification", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.ComptenceClassification", b =>
+                {
+                    b.Navigation("Comptences");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.DismissClassification", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.EngilshLanguge", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
             modelBuilder.Entity("NorthStorm.Models.Classifications.Gender", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.GeneralAndPrecise", b =>
                 {
                     b.Navigation("Employees");
                 });
@@ -1217,9 +2810,24 @@ namespace NorthStorm.Migrations
                     b.Navigation("Locations");
                 });
 
+            modelBuilder.Entity("NorthStorm.Models.Classifications.MaritalStatusClassification", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.MilitaryClassification", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
             modelBuilder.Entity("NorthStorm.Models.Classifications.Nationality", b =>
                 {
                     b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.PunishmentClassification", b =>
+                {
+                    b.Navigation("Punishments");
                 });
 
             modelBuilder.Entity("NorthStorm.Models.Classifications.Race", b =>
@@ -1232,9 +2840,51 @@ namespace NorthStorm.Migrations
                     b.Navigation("Employees");
                 });
 
+            modelBuilder.Entity("NorthStorm.Models.Classifications.ResponsibleClassification", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.ShiftClassification", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Classifications.StaffClassification", b =>
+                {
+                    b.Navigation("Employees");
+
+                    b.Navigation("Recruitment");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Comptence", b =>
+                {
+                    b.Navigation("ChildComptences");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.CreditedService", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
             modelBuilder.Entity("NorthStorm.Models.Employee", b =>
                 {
                     b.Navigation("EmployeeJobTitles");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Evaluation", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.GovernmentalInstitute", b =>
+                {
+                    b.Navigation("ChildGovernmentalInstitutes");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.JobPosition", b =>
+                {
+                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("NorthStorm.Models.JobTitle", b =>
@@ -1244,7 +2894,42 @@ namespace NorthStorm.Migrations
                     b.Navigation("EmployeeJobTitles");
                 });
 
+            modelBuilder.Entity("NorthStorm.Models.Leave", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Privilege", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Punishment", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
             modelBuilder.Entity("NorthStorm.Models.Recruitment", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Retirement", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Shift", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.Staffing", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("NorthStorm.Models.ThankAndAppreciation", b =>
                 {
                     b.Navigation("Employees");
                 });

@@ -1,0 +1,100 @@
+﻿@model NorthStorm.Models.Classifications.LeaveClassification
+
+
+@{
+    Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+    ViewData["Title"] = "تحديث القيد";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p>
+    <span class="text-danger h4">
+    </span>
+</p>
+
+<div class="card bg-light mb-3">
+    <div class="card-header">بيانات القيد</div>
+    <form asp-action="Edit" class="card-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="row col-md-12">
+
+
+            <div class="form-group col-md-2">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label asp-for="gender" class="control-label"></label>
+                <select asp-for="GenderId" class="form-control" asp-items="ViewBag.GenderId">
+                    <option value="">-- إختر الجنس --</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label asp-for="LeaveIndays" class="control-label"></label>
+                <input asp-for="LeaveIndays" class="form-control" />
+                <span asp-validation-for="LeaveIndays" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label asp-for="ServiceCharged" class="control-label"></label>
+                <input asp-for="ServiceCharged" type="checkbox" class="align-middle" />
+                <span asp-validation-for="ServiceCharged" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label asp-for="PromotionCharged" class="control-label"></label>
+                <input asp-for="PromotionCharged" type="checkbox" class="align-middle" />
+                <span asp-validation-for="PromotionCharged" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label asp-for="OutSideLaborForce" class="control-label"></label>
+                <input asp-for="OutSideLaborForce" type="checkbox" class="align-middle" />
+                <span asp-validation-for="OutSideLaborForce" class="text-danger"></span>
+            </div>
+            <div class="row col-md-2">
+                    <label asp-for="SalaryCharged" class="control-label"></label>
+                    <input asp-for="SalaryCharged" class="align-middle" />
+                    <span asp-validation-for="SalaryCharged" class="text-danger"></span>
+                </div>
+            </div>
+            @* للبدء بسطر جديد فوق فقط   *@
+
+            <div class="row col-md-12">
+                <div class="form-group col-md-10">
+                    <label asp-for="OtherNotes" class="control-label"></label>
+                    <input asp-for="OtherNotes" class="form-control" />
+                    <span asp-validation-for="OtherNotes" class="text-danger"></span>
+                </div>
+
+
+                </<div>
+
+                    <div class="form-group col-md-2 align-self-end text-md-center">
+                        <input type="submit" value="حفظ" class="btn btn-primary w-75" />
+                    </div>
+                </div>
+
+    </form>
+    <div class="card-footer">
+        <br />
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">إلغاء</a>
+</div>
+
+@section Scripts {
+    @{
+
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

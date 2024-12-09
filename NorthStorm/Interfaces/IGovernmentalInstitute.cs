@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NorthStorm.Models.Assistants;
+using NorthStorm.Models;
 using NorthStorm.Models.ViewModels;
 
 namespace NorthStorm.Interfaces

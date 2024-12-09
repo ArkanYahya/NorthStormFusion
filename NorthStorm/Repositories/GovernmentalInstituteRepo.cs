@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NorthStorm.Data;
 using NorthStorm.Interfaces;
-using NorthStorm.Models.Assistants;
+using NorthStorm.Models;
 using NorthStorm.Models.ViewModels;
 
 namespace NorthStorm.Repositories

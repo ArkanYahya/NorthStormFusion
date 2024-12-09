@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using NorthStorm.Data;
 using NorthStorm.Interfaces;
 using NorthStorm.Models;
-using NorthStorm.Models.Assistants;
 using NorthStorm.Models.ViewModels;
 using NorthStorm.Repositories;
 using NorthStorm.ViewModels;

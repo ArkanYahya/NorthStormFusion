@@ -1,0 +1,144 @@
+﻿@* @model NorthStorm.Models.Employee
+
+@{
+    string pageTitle = "جدول الموظفين";
+    ViewData["Title"] = pageTitle + " / " + "تفاصيل موظف";
+    string serverPath = "/Photos/" + Model.Id + ".jpg";
+    var localPath = Directory.GetCurrentDirectory() + "\\wwwroot\\Photos\\" + Model.Id + ".jpg";
+    if (!File.Exists(localPath))
+    {
+        serverPath = "/Photos/nophoto.png";
+    }
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p>
+    <span class="text-danger h4">
+    </span>
+</p>
+
+<div class="card bg-light mb-3">
+    <div class="card-header">المعلومات الرئيسية</div>
+    <div class="card-body">
+        <div class="row col-md-12">
+            <div class="col col-md-2">
+                <img src="@serverPath" class="d-flex justify-content-center rounded-circle" width="180" height="180" alt="Avatar" />
+            </div>
+            <div class="col col-md-10">
+                <div class="row col-md-12">
+
+                    <div class="form-group col-md-2">
+                        <div class="control-label">
+                            @Html.DisplayNameFor(model => model.Id)
+                        </div>
+                        <div class="form-control">
+                            @Html.DisplayFor(model => model.Id)
+                        </div>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <div class="control-label">
+                            @Html.DisplayNameFor(model => model.FullName)
+                        </div>
+                        <div class="form-control">
+                            @Html.DisplayFor(model => model.FullName)
+                        </div>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <div class="control-label">
+                            @Html.DisplayNameFor(model => model.MotherName)
+                        </div>
+                        <div class="form-control">
+                            @Html.DisplayFor(model => model.MotherName)
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row col-md-12">
+                    <div class="form-group col-md-2">
+                        <div class="control-label">
+                            @Html.DisplayNameFor(model => model.BirthDate)
+                        </div>
+                        <div class="form-control">
+                            @Html.DisplayFor(model => model.BirthDate)
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <div class="control-label">
+                            @Html.DisplayNameFor(model => model.gender)
+                        </div>
+                        <div class="form-control">
+                            @Html.DisplayFor(model => model.gender.Name)
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <div class="control-label">
+                            @Html.DisplayNameFor(model => model.religion)
+                        </div>
+                        <div class="form-control">
+                            @Html.DisplayFor(model => model.religion.Name)
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <div class="control-label">
+                            @Html.DisplayNameFor(model => model.race)
+                        </div>
+                        <div class="form-control">
+                            @Html.DisplayFor(model => model.race.Name)
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <div class="control-label">
+                            @Html.DisplayNameFor(model => model.nationality)
+                        </div>
+                        <div class="form-control">
+                            @Html.DisplayFor(model => model.nationality.Name)
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-12">
+                    <div class="form-group col-md-3">
+                        <div class="control-label">
+                            @Html.DisplayNameFor(model => model.CivilNumber)
+                        </div>
+                        <div class="form-control">
+                            @Html.DisplayFor(model => model.CivilNumber)
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <div class="control-label">
+                            @Html.DisplayNameFor(model => model.IBAN)
+                        </div>
+                        <div class="form-control">
+                            @Html.DisplayFor(model => model.IBAN)
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <div class="control-label">
+                            @Html.DisplayNameFor(model => model.dismissClassification)
+                        </div>
+                        <div class="form-control">
+                            @Html.DisplayFor(model => model.dismissClassification.Name)
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <span>
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="card-footer">
+        <br />
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">إلغاء</a>
+</div> *@

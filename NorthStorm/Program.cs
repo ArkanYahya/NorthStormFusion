@@ -8,8 +8,10 @@ using System.Security.Policy;
 using Microsoft.AspNetCore.Authentication;
 using NorthStorm.Interfaces.Classifications;
 using NorthStorm.Repositories.Classifications;
-using NorthStorm.Interfaces.Tmp;
-using NorthStorm.Repositories.Tmp;
+using NorthStorm.Models;
+using NorthStorm.Models.Assistants;
+using NorthStorm.Models.Classifications;
+using NorthStorm.Interfaces.Assistants;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<NorthStormContext>(options =>
@@ -28,31 +30,66 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 
-
+// Classification Interferces
+builder.Services.AddScoped<IBeneficiaryClassification, BeneficiaryClassificationRepo>();
+builder.Services.AddScoped<ICareerClassification, CareerClassificationRepo>();
+builder.Services.AddScoped<ICollegeName, CollegeNameRepo>();
+builder.Services.AddScoped<IComptenceClassification, ComptenceClassificationRepo>();
+builder.Services.AddScoped<ICreditedServiceClassification, CreditedServiceClassificationRepo>();
+builder.Services.AddScoped<IDeputyClassification, DeputyClassificationRepo>();
+builder.Services.AddScoped<IDismissClassification, DismissClassificationRepo>();
+builder.Services.AddScoped<IEducationalInstitution, EducationalInstitutionRepo>();
+builder.Services.AddScoped<IEducationalInstitutionClassification,  EducationalInstitutionClassificationRepo>();
+builder.Services.AddScoped<IEngilshLanguge, EngilshLangugeRepo>();
+builder.Services.AddScoped<IEvaluationClassification, EvaluationClassificationRepo>();
 builder.Services.AddScoped<IGender, GenderRepo>();
+builder.Services.AddScoped<IGeneralAndPrecise,  GeneralAndPreciseRepo>();
 builder.Services.AddScoped<IGovernmentalInstituteClassification, GovernmentalInstituteClassificationRepo>();
+builder.Services.AddScoped<IJobTitleChangeClassification, JobTitleChangeClassificationRepo>();
 builder.Services.AddScoped<IJobTitleClassification, JobTitleClassificationRepo>();
+builder.Services.AddScoped<ILeaveClassification, LeaveClassificationRepo>();
 builder.Services.AddScoped<ILevelClassification, LevelClassificationRepo>();
 builder.Services.AddScoped<ILocationClassification, LocationClassificationRepo>();
+builder.Services.AddScoped<IMaritalStatusClassification, MaritalStatusClassificationRepo>();
+builder.Services.AddScoped<IMilitaryClassification, MilitaryClassificationRepo>();
 builder.Services.AddScoped<INationality, NationalityRepo>();
+builder.Services.AddScoped<IPrivilegeClassification, PrivilegeClassificationRepo>();
+builder.Services.AddScoped<IPunishmentClassification,  PunishmentTypeRepo>();
 builder.Services.AddScoped<IRace, RaceRepo>();
 builder.Services.AddScoped<IReligion, ReligionRepo>();
+builder.Services.AddScoped<IResponsibleClassification, ResponsibleClassificationRepo>();
+builder.Services.AddScoped<IRewardClassification, RewardClassificationRepo>();
+builder.Services.AddScoped<IShiftClassification, ShiftClassificationRepo>();
+builder.Services.AddScoped<IStaffClassification, StaffClassificationRepo>();
+builder.Services.AddScoped<IStatus, StatusRepo>();
+builder.Services.AddScoped<IThankClassification, ThankClassificationRepo>();
 
+// Root Interfaces
+builder.Services.AddScoped<IAbsence, AbsenceRepo>();
+builder.Services.AddScoped<ICertificate, CertificateRepo>();
+builder.Services.AddScoped<IComptence, ComptenceRepo>();
+builder.Services.AddScoped<ICreditedService, CreditedServiceRepo>();
 builder.Services.AddScoped<IEmployee, EmployeeRepo>();
+builder.Services.AddScoped<IEvaluation, EvaluationRepo>();
 builder.Services.AddScoped<IGovernmentalInstitute, GovernmentalInstituteRepo>();
 builder.Services.AddScoped<IGrade, GradeRepo>();
+builder.Services.AddScoped<IJobPosition, JobPositionRepo>();
 builder.Services.AddScoped<IJobTitle, JobTitleRepo>();
 builder.Services.AddScoped<IJobTransfer, JobTransferRepo>();
+builder.Services.AddScoped<ILeave, LeaveRepo>();
 builder.Services.AddScoped<ILevel, LevelRepo>();
 builder.Services.AddScoped<ILocation, LocationRepo>();
+builder.Services.AddScoped<INationalCard, NationalCardRepo>();
+builder.Services.AddScoped<IPrivilege, PrivilegeRepo>();
+builder.Services.AddScoped<IPromotion, PromotionRepo>();
+builder.Services.AddScoped<IPunishment, PunishmentRepo>();
+builder.Services.AddScoped<IRankOther, RankOtherRepo>();
+builder.Services.AddScoped<IRetirement, RetirementRepo>();
 builder.Services.AddScoped<IRecruitment, RecruitmentRepo>();
+builder.Services.AddScoped<IShift, ShiftRepo>();
+builder.Services.AddScoped<IStaffing, StaffingRepo>();
+builder.Services.AddScoped<IThankAndAppreciation, ThankAndAppreciationRepo>();
 
-
-builder.Services.AddScoped<ITmpAppreciation, TmpAppreciationRepo>();
-builder.Services.AddScoped<ITmpBonus, TmpBonusRepo>();
-builder.Services.AddScoped<ITmpLeave, TmpLeaveRepo>();
-builder.Services.AddScoped<ITmpLeaveRequest, TmpLeaveRequestRepo>();
-builder.Services.AddScoped<ITmpPromotion, TmpPromotionRepo>();
 
 
 // اضافة
@@ -116,7 +153,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=PublicHomepage}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();

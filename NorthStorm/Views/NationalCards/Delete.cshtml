@@ -1,0 +1,102 @@
+﻿@* @model NorthStorm.Models.Employee
+
+@{
+    string pageTitle = "جدول الموظفين";
+    ViewData["Title"] = pageTitle + " / " + "حذف قيد";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p>
+    <span class="text-danger h4">
+        هل أنت متأكد من حذف القيد؟
+    </span>
+</p>
+
+<div class="card bg-light mb-3">
+    <div class="card-header">المعلومات الرئيسية</div>
+    <div class="card-body">
+        <div class="row col-md-12">
+            <div class="form-group col-md-2">
+                <label class="control-label">@Html.DisplayNameFor(model => model.Id)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.Id)" readonly />
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">@Html.DisplayNameFor(model => model.FullName)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.FullName)" readonly />
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">@Html.DisplayNameFor(model => model.MotherName)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.MotherName)" readonly />
+            </div>
+            <div class="form-group col-md-2">
+            </div>
+
+            <div class="form-group col-md-2">
+            </div>
+
+        </div>
+        <div class="row col-md-12">
+            <div class="form-group col-md-2">
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">@Html.DisplayNameFor(model => model.BirthDate)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.BirthDate)" readonly />
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">@Html.DisplayNameFor(model => model.gender)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.gender.Name)" readonly />
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">@Html.DisplayNameFor(model => model.religion)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.religion.Name)" readonly />
+            </div>
+
+            <div class="form-group col-md-2">
+                <label class="control-label">@Html.DisplayNameFor(model => model.race)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.race.Name)" readonly />
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">@Html.DisplayNameFor(model => model.nationality)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.nationality.Name)" readonly />
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <div class="form-group col-md-2">
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">@Html.DisplayNameFor(model => model.CivilNumber)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.CivilNumber)" readonly />
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">@Html.DisplayNameFor(model => model.IBAN)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.IBAN)" readonly />
+            </div>
+
+            <div class="form-group col-md-2">
+                <label class="control-label">@Html.DisplayNameFor(model => model.dismissClassification)</label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.dismissClassification.Name)" readonly />
+            </div>
+            <div class="form-group col-md-2">
+            </div>
+        </div>
+
+
+    </div>
+    <div class="card-footer">
+        <br/>
+    </div>
+</div>
+
+<div class="row col-md-12">
+    <div class="form-group col-md-2">
+        <a asp-action="Index">إلغاء</a>
+    </div>
+    <div class="form-group col-md-8">
+    </div>
+    <form asp-action="Delete" class="form-group col-md-2">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="حذف" class="btn btn-danger w-100" />
+    </form>
+</div> *@

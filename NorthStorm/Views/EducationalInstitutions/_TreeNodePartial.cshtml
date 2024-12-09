@@ -1,0 +1,14 @@
+﻿@model NorthStorm.Models.Assistants.EducationalInstitution
+
+<a href="#">@Model.Name</a>
+@if (Model.ChildEducationalInstitutions != null && Model.ChildEducationalInstitutions.Count > 0)
+{
+    <ul>
+        @foreach (var child in Model.ChildEducationalInstitutions)
+        {
+            <li>
+                @Html.Partial("_TreeNodePartial", child)
+            </li>
+        }
+    </ul>
+}

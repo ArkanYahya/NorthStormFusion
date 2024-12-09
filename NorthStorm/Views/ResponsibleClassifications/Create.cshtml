@@ -1,0 +1,83 @@
+﻿@model NorthStorm.Models.Classifications.ResponsibleClassification
+
+@{
+    Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+    string pageTitle = "تصنيف المناصب الوظيفية";
+    ViewData["Title"] = pageTitle + " / " + "إنشاء قيد";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<form asp-action="Create">
+
+    <div class="card bg-light mb-3">
+        <div class="card-header">بيانات القيد</div>
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row col-md-12">
+                <div class="form-group col-md-0">
+                    <input type="hidden" asp-for="Id" />
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group col-md-2">
+                    <label asp-for="ResponsiblityPercentage" class="control-label"></label>
+                    <input asp-for="ResponsiblityPercentage" class="form-control" />
+                    <span asp-validation-for="ResponsiblityPercentage" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label asp-for="ResponsiblSPSS1" class="control-label"></label>
+                    <input asp-for="ResponsiblSPSS1" class="form-control" />
+                    <span asp-validation-for="ResponsiblSPSS1" class="text-danger"></span>
+                </div>
+
+                <div class="row col-md-2">
+                    <label asp-for="ResponsiblSPSS2" class="control-label"></label>
+                    <input asp-for="ResponsiblSPSS2" class="form-control" />
+                    <span asp-validation-for="ResponsiblSPSS2" class="text-danger"></span>
+                </div>
+                <div>
+                    <br />
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="ResponsiblityInEnglish" class="control-label"></label>
+                    <input asp-for="ResponsiblityInEnglish" class="form-control" />
+                    <span asp-validation-for="ResponsiblityInEnglish" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                </div>
+                </div>
+            </div>
+              <div class="card-footer">
+            <br />
+
+        </div>
+    </div>
+
+    <div class="row col-md-12">
+        <div class="form-group col-md-2">
+            <a asp-action="Index">إلغاء</a>
+        </div>
+        <div class="form-group col-md-8">
+        </div>
+        <div class="form-group col-md-2">
+            <input type="submit" value="حفظ" class="btn btn-primary w-100" />
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+}

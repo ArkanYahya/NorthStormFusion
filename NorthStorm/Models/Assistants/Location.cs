@@ -1,5 +1,4 @@
-﻿using NorthStorm.Models.Assistants;
-using NorthStorm.Models.Classifications;
+﻿using NorthStorm.Models.Classifications;
 using System.ComponentModel.DataAnnotations;
 
 namespace NorthStorm.Models.Assistants

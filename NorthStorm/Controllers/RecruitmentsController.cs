@@ -50,7 +50,6 @@ namespace NorthStorm.Controllers
             pager.SortExpression = sortExpression;
             this.ViewBag.Pager = pager;
 
-
             TempData["CurrentPage"] = pg;
             return View(items);
         }

@@ -13,30 +13,24 @@ namespace NorthStorm.Models.Assistants
          Display(Name = "الدرجة رقما")]
         public int GradeNumber { get; set; }
 
-        [StringLength(13, MinimumLength = 4)]
+        //[StringLength(13, MinimumLength = 4)]
         [Required(ErrorMessage = "يرجى ادخال الدرجة كتابة"),
         Display(Name = "الدرجة كتابة")]
         public string GradeAsWriting { get; set; }
 
         [Range(170000, 910000)]
         [UIHint("NumberInThousands")]
-        //[DataType(DataType.Currency)]
-        //[Column(TypeName = "decimal(11, 3)")]
         [Required(ErrorMessage = "يرجى ادخال مبلغ المرحلة الأولى"),
         Display(Name = "المرحلة01")]
         public int Stage01 { get; set; }
 
         [Range(173000, 930000)]
-        //[DataType(DataType.Currency)]
-        //[Column(TypeName = "decimal(11, 3)")]
         [UIHint("NumberInThousands")]
         [Required(ErrorMessage = "يرجى ادخال مبلغ المرحلة الثانية"),
         Display(Name = "المرحلة02")]
         public int Stage02 { get; set; }
 
         [Range(176000, 950000)]
-        //[DataType(DataType.Currency)]
-        //[Column(TypeName = "decimal(11, 3)")]
         [UIHint("NumberInThousands")]
         [Required(ErrorMessage = "يرجى ادخال مبلغ المرحلة الثالثة"),
         Display(Name = "المرحلة03")]
@@ -87,7 +81,7 @@ namespace NorthStorm.Models.Assistants
         [Range(200000, 1110000)]
         [UIHint("NumberInThousands")]
         [Required(ErrorMessage = "يرجى ادخال مبلغ المرحلة الحادية عشر"),
-            Display(Name = "المرحلة11")]
+        Display(Name = "المرحلة11")]
         public int Stage11 { get; set; }
 
         [Range(3000, 20000)]
@@ -100,14 +94,17 @@ namespace NorthStorm.Models.Assistants
         [Required(ErrorMessage = "يرجى ادخال المدة الاصغرية للترقية"),
         Display(Name = "مدة الترقية")]
         public int MinimumDuration { get; set; }
+        #endregion
 
-
-
+        #region Foreign Keys
+        public string? RankAsFemale { get; set; }          // Foreign Key
         #endregion
 
         #region Navigstion Properties
-        //public ICollection<Employee> Employees { get; set; }
-        //public ICollection<JobTitle> JobTitles { get; set; }
+        [Display(Name = "الدرجة")]
+        public RankOther rankOther { get; set; }
+
+        //public string RankAsFemale { get; set; }   المطلوب هو الرانك فيميل الاولى ...الخ
         #endregion
     }
 }

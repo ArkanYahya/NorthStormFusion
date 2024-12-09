@@ -1,0 +1,15 @@
+﻿@model NorthStorm.Models.Assistants.EducationalInstitution
+
+
+<li>
+    @Model.Name
+    @if (Model.ChildEducationalInstitutions != null && Model.ChildEducationalInstitutions.Any())
+    {
+        <ul>
+            @foreach (var childEducationalInstitution in Model.ChildEducationalInstitutions)
+            {
+                @Html.Partial("_EducationalInstitutionTree", childEducationalInstitution)
+            }
+        </ul>
+    }
+</li>

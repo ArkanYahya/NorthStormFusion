@@ -39,14 +39,56 @@ namespace NorthStorm.Data
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<EmployeeJobTitle> EmployeeJobTitles { get; set; }
         public DbSet<LevelClassification> LevelClassifications { get; set; }
-        
-        
-        public DbSet<TmpAppreciation> TmpAppreciations{ get; set; }
+        public DbSet<ThankClassification> ThankClassifications { get; set; }            // التشكرات
+
+
+        public DbSet<TmpAppreciation> TmpAppreciations { get; set; }
         public DbSet<TmpBonus> TmpBonuses { get; set; }
-        public DbSet<TmpLeave> TmpLeaves{ get; set; }
+        public DbSet<TmpLeave> TmpLeaves { get; set; }
         public DbSet<TmpLeaveRequest> TmpLeaveRequests { get; set; }
         public DbSet<TmpPromotion> TmpPromotions { get; set; }
-        
+
+
+        public DbSet<EducationalInstitution> EducationalInstitutions { get; set; }      // المؤسسات التعليمية
+        public DbSet<EducationalInstitutionClassification> EducationalInstituteClassifications { get; set; } // تصنيف المؤسسات التعليمية
+        public DbSet<ComptenceClassification> ComptenceClassifications { get; set; }    // تصنيف التخصصات
+        public DbSet<CareerClassification> CareerClassifications { get; set; }          // المهن والدور الوظيفي
+        public DbSet<PunishmentClassification> PunishmentTypes { get; set; }            // أنواع العقوبات
+        public DbSet<ResponsibleClassification> ResponsibleClassifications { get; set; }       // المسؤولية
+        public DbSet<MilitaryClassification> MilitaryClassification { get; set; }       // الخدمة العسكرسة
+        public DbSet<PrivilegeClassification> PrivilegeClassifications { get; set; }    // الامتيازات الوظيفية
+        public DbSet<LeaveClassification> LeaveClassifications { get; set; }            // الاجازات
+        public DbSet<StaffClassification> StaffClassifications { get; set; }            // نوع الملاك الاضافات
+        public DbSet<DismissClassification> DismissClassifications { get; set; }        //  اشغال الملاك المطروحات
+        public DbSet<Comptence> Comptences { get; set; }                                // التخصصات العلمية
+        public DbSet<MaritalStatusClassification> MaritalStatusClassifications { get; set; }    // الحالة الاجتماعية
+        public DbSet<EngilshLanguge> EngilshLanguges { get; set; }                      // مستويات اللغة الانكليزية
+        public DbSet<ShiftClassification> ShiftClasifications { get; set; }             // دوام المناوبات
+        public DbSet<RewardClassification> RewardClassifications { get; set; }          // دوام المكافات والمساعدات
+        public DbSet<RankOther> RankOthers { get; set; }                                // يفيد لترتيب الحقول تصاعديا او تنازليا
+        public DbSet<CollegeName> CollegeNames { get; set; }                            // الكليات و المعاهد
+        public DbSet<Punishment> Punishments { get; set; }                              // اوامر عقوبات الموظفين
+        public DbSet<Leave> Leaves { get; set; }                                        // اوامر الاجازات للموظفين
+        public DbSet<EvaluationClassification> EvaluationClassifications { get; set; }  //  تصنيف التقييم للموظفين
+        public DbSet<Evaluation> Evaluation { get; set; }                               //  تقييم للموظفين
+        public DbSet<GeneralAndPrecise> GeneralAndPrecises { get; set; }                //  تصنيف العام و الدقيق
+        public DbSet<DeputyClassification> DeputyClassifications { get; set; }          //  تصنيف الوكالة والاصالة
+        public DbSet<BeneficiaryClassification> BeneficiaryClassifications { get; set; }    // مستفيد او لا
+        public DbSet<ThankAndAppreciation> ThankAndAppreciations { get; set; }          // الشكر والتقدير للموظفين
+        public DbSet<CreditedServiceClassification> CreditedServiceClassifications { get; set; }    // تصنيف الخدمة المضافة
+        public DbSet<Shift> Shifts { get; set; }                                        // اوامر نوع الدوام/ المناوبات
+        public DbSet<CreditedService> CreditedServices { get; set; }                    // اوامر نوع احتساب الخدمات المضمونة المضافة
+        public DbSet<Privilege> Privileges { get; set; }                                // اوامر احتساب الامتيازات الوظيفية
+        public DbSet<Retirement> Retirements { get; set; }                              // اوامر التقاعد
+        public DbSet<JobPosition> JobPositions { get; set; }                            // اوامر المنصب الوظيفي
+        public DbSet<Staffing> Staffings { get; set; }                                  // المـــــــــــلاك
+        public DbSet<Absence> Absences { get; set; }                                    // الغيـــــــاب
+        public DbSet<JobTitleChangeClassification> JobTitleChangeClassifications { get; set; }  // تصنيف نغيير العنوان الوظيفي
+        public DbSet<DocumintsAndComminication> DocumintsAndComminications { get; set; }    // ملف الوثائق و التصال للموظفين
+        public DbSet<NationalCard> NationalCards { get; set; }                          // ملف معلومات البطاقة الوطنية
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Level>()
@@ -71,11 +113,11 @@ namespace NorthStorm.Data
                 .HasForeignKey(c => c.DestinationLevelId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Certificate>()
-                .HasOne(c => c.University)
-                .WithMany()
-                .HasForeignKey(c => c.UniversityId)
-                .OnDelete(DeleteBehavior.NoAction);
+            //modelBuilder.Entity<Certificate>()
+            //    .HasOne(c => c.University)
+            //    .WithMany()
+            //    .HasForeignKey(c => c.UniversityId)
+            //    .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<JobTitle>()
                 .HasOne(c => c.Grade)

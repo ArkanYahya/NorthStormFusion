@@ -1,0 +1,206 @@
+﻿@model NorthStorm.Models.ViewModels.StaffingCreateViewModel
+
+@{
+    Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+    string pageTitle = "الملاك الوظيفي";
+    ViewData["Title"] = pageTitle + " / " + "إنشاء قيد";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p>
+    <span class="text-danger h4">
+    </span>
+</p>
+
+<form asp-action="Create">
+
+    <div class="card bg-light mb-3">
+        <div class="card-header">
+            بيانات القيد
+        </div>
+        <div class="card-body">
+
+            <div class="row col-md-12">
+
+                <div class="row col-md-12">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group col-2 ">
+                        <label asp-for="ReferenceNo" class="control-label"></label>
+                        <input asp-for="ReferenceNo" class="form-control" />
+                        <span asp-validation-for="ReferenceNo" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-2">
+                        <label asp-for="ReferenceDate" class="control-label"></label>
+                        <input asp-for="ReferenceDate" class="form-control" />
+                        <span asp-validation-for="ReferenceDate" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="form-group col-2">
+                        <label asp-for="StaffingJobTitleId" class="control-label"></label>
+                        <select asp-for="StaffingJobTitleId" class="form-control" asp-items="ViewBag.StaffingJobTitleId">
+                            <option value="">-- إختر الملاك الوظيفي --</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-1">
+                        <label asp-for="StaffingCount" class="control-label"></label>
+                        <input asp-for="StaffingCount" class="form-control" />
+                        <span asp-validation-for="StaffingCount" class="text-danger"></span>
+                    </div>
+
+
+
+                    <div class="form-group col-4">
+                        <label asp-for="StaffingUnitId" class="control-label"></label>
+                        <select asp-for="StaffingUnitId" class="form-control" asp-items="ViewBag.StaffingUnitId">
+                            <option value="">-- إختر الوحدة التنظيمية --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <br />
+                    </div>
+
+
+                    <div class="form-group col-2">
+                        <label asp-for="EmployeeCounted" class="control-label"></label>
+                        <input asp-for="EmployeeCounted" class="form-control" />
+                        <span asp-validation-for="EmployeeCounted" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-2">
+                        <label asp-for="VacantStaffing" class="control-label"></label>
+                        <input asp-for="VacantStaffing" class="form-control" />
+                        <span asp-validation-for="VacantStaffing" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="form-group col-2">
+                    </div>
+                </div>
+                <div>
+                    <br />
+                </div>
+                <div class="row col-md-12">
+                    <div class="form-group col-md-2">
+                        <label for="employeeIdInput" class="control-label">رقم أو إسم الموظف</label>
+                        <input type="text" id="employeeIdInput" class="form-control" />
+                        <span class="text-danger" id="employeeIdError"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <table id="emplyeesTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">رقم الموظف</th>
+                                    <th scope="col">الإسم الكامل</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="selectedEmployees">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <br />
+                    </div>
+                </div>
+                <div class="row col-md-12">
+                    <div class="form-group col-md-2">
+                    </div>
+                    <div class="form-group col-md-8">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <br />
+
+        </div>
+    </div>
+    <div class="row col-md-12">
+        <div class="form-group col-md-2">
+            <a asp-action="Index">إلغاء</a>
+        </div>
+        <div class="form-group col-md-8">
+        </div>
+        <div class="form-group col-md-2">
+            <input type="submit" value="حفظ" class="btn btn-primary w-100" />
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+                {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <script type="text/javascript">
+        $(function () {
+            var selectedEmployees = [];
+
+            $("#employeeIdInput").autocomplete({
+                source: '@Url.Action("Autocomplete", "Staffings")',
+                minLength: 2,
+                select: function (event, ui) {
+                    // Check if the employee is already selected
+                    if (!selectedEmployees.some(emp => emp.value === ui.item.value)) {
+                        $("#employeeIdError").text("");
+
+                        // Add selected employee to the list
+                        selectedEmployees.push(ui.item);
+                        $("#selectedEmployees").append(
+                            `<tr data-id="${ui.item.value}">
+                                                            <td>${ui.item.value}</td>
+                                                            <td>${ui.item.name}</td>
+                                                            <td>
+                                                            <button type="button" class="btn btn-sm btn-danger float-right remove-employee">-</button>
+                                                            </td>
+                                                            </tr>`
+                        );
+                    } else {
+                        $("#employeeIdError").text("لا يمكن تكرار الموظف!");
+                        event.preventDefault();
+                        return;
+                    }
+                    // Clear the input field
+                    $("#employeeIdInput").val('');
+                    return false;
+                }
+            });
+
+            // Handle remove employee button click
+            $(document).on('click', '.remove-employee', function () {
+                var item = $(this).closest('tr');
+                var employeeId = item.data('id');
+                selectedEmployees = selectedEmployees.filter(emp => emp.value !== employeeId);
+                item.remove();
+            });
+
+            // Form submission
+            $("form").submit(function (event) {
+                if (selectedEmployees.length === 0) {
+                    $("#employeeIdError").text("رجاء إختر موظف واحد على الأقل!");
+                    event.preventDefault();
+                    return;
+                }
+
+                //Create hidden input fields for selected employee IDs
+                selectedEmployees.forEach(emp => {
+                    $(this).append(`<input type="hidden" name="EmployeeIds" value="${emp.value}" />`);
+                });
+                // selectedEmployees.forEach(emp => {
+                //     $(this).append(`<input type="hidden" name="Employees[${selectedEmployees.indexOf(emp)}].EmployeeId" value="${emp.value}" />`);
+                //     $(this).append(`<input type="hidden" name="Employees[${selectedEmployees.indexOf(emp)}].FullName" value="${emp.label}" />`);
+                // });
+            });
+        });
+    </script>
+
+    }
+}

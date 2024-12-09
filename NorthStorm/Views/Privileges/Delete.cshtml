@@ -1,0 +1,95 @@
+﻿@model NorthStorm.Models.Privilege
+
+@{
+    Layout = "~/Views/Shared/_AuthenticatedLayout.cshtml";
+    string pageTitle = "أوامر الإمتياز الوظيفي";
+    ViewData["Title"] = pageTitle + " / " + "حذف قيد";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p>
+    <div class="text-danger h4">
+        <h4 class="text-danger">هل أنت متأكد من حذف القيد؟</h4>
+    </div>
+</p>
+<div class="card bg-light mb-3">
+    <div class="card-header">بيانات القيد</div>
+    <div class="card-body">
+        <div class="row col-md-12">
+            <div class="row col-md-12">
+                <div class="form-group col-2 ">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.ReferenceNo)</label>
+                    <input class="form-control" value="@Html.DisplayFor(model => model.ReferenceNo)" readonly />
+                </div>
+                <div class="form-group col-2">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.ReferenceDate)</label>
+                    <input class="form-control" value="@Html.DisplayFor(model => model.ReferenceDate)" readonly />
+                </div>
+                <div class="form-group col-2">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.Subject)</label>
+                    <input class="form-control" value="@Html.DisplayFor(model => model.Subject)" readonly />
+                </div>
+                <div class="form-group col-2">
+                    <label class="control-label">@Html.DisplayNameFor(model => model.PrivilegeClassificationId)</label>
+                    <input class="form-control" value="@Html.DisplayFor(model => model.PrivilegeClassificationId)" readonly />
+                </div>
+
+                <div>
+                    <br />
+                </div>
+
+                <div class="form-group col-md-8">
+                    <table id="emplyeesTable" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">رقم الموظف</th>
+                                <th scope="col">الإسم الكامل</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="selectedEmployees">
+                            @foreach (var item in Model.Employees)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FullName)
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <br />
+
+            </div>
+        </div>
+
+        <div class="row col-md-12">
+            <div class="form-group col-md-2">
+                <a asp-action="Index">إلغاء</a>
+            </div>
+            <div class="form-group col-md-8">
+            </div>
+            <form asp-action="Delete" class="form-group col-md-2">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="حذف" class="btn btn-danger w-100" />
+            </form>
+        </div>
+
+        
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

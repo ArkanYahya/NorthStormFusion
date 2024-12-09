@@ -1,0 +1,154 @@
+﻿@* @model NorthStorm.Models.Employee
+
+@{
+    string pageTitle = "جدول الموظفين";
+    ViewData["Title"] = pageTitle + " / " + "تعديل قيد";
+
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<p>
+    <span class="text-danger h4">
+    </span>
+</p>
+<form asp-action="Edit">
+
+    <div class="card bg-light mb-3">
+        <div class="card-header">المعلومات الرئيسية</div>
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="IsCreateAction" />
+            <div class="row col-md-12">
+                <div class="form-group col-md-2">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" readonly />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="MiddleName" class="control-label"></label>
+                    <input asp-for="MiddleName" class="form-control" />
+                    <span asp-validation-for="MiddleName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="FourthName" class="control-label"></label>
+                    <input asp-for="FourthName" class="form-control" />
+                    <span asp-validation-for="FourthName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="SurName" class="control-label"></label>
+                    <input asp-for="SurName" class="form-control" />
+                    <span asp-validation-for="SurName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="MotherFirstName" class="control-label"></label>
+                    <input asp-for="MotherFirstName" class="form-control" />
+                    <span asp-validation-for="MotherFirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="MotherMiddleName" class="control-label"></label>
+                    <input asp-for="MotherMiddleName" class="form-control" />
+                    <span asp-validation-for="MotherMiddleName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="MotherLastName" class="control-label"></label>
+                    <input asp-for="MotherLastName" class="form-control" />
+                    <span asp-validation-for="MotherLastName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="BirthDate" class="control-label"></label>
+                    <input asp-for="BirthDate" class="form-control" />
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="gender" class="control-label"></label>
+                    <select asp-for="GenderId" class="form-control" asp-items="ViewBag.GenderId">
+                        <option value="">-- إختر الجنس --</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="religion" class="control-label"></label>
+                    <select asp-for="ReligionId" class="form-control" asp-items="ViewBag.ReligionId">
+                        <option value="">-- إختر الديانة --</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="race" class="control-label"></label>
+                    <select asp-for="RaceId" class="form-control" asp-items="ViewBag.RaceId">
+                        <option value="">-- إختر القومية --</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="nationality" class="control-label"></label>
+                    <select asp-for="NationalityId" class="form-control" asp-items="ViewBag.NationalityId">
+                        <option value="">-- إختر الجنسية --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="CivilNumber" class="control-label"></label>
+                    <input asp-for="CivilNumber" class="form-control" />
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="IBAN" class="control-label"></label>
+                    <input asp-for="IBAN" class="form-control" />
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="dismissClassification" class="control-label"></label>
+                    <select asp-for="DismissClassificationId" class="form-control" asp-items="ViewBag.DismissClassificationId">
+                        <option value="">-- إختر الحالة --</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <br />
+        </div>
+    </div>
+
+    <div class="row col-md-12">
+        <div class="form-group col-md-2">
+            <a asp-action="Index">إلغاء</a>
+        </div>
+        <div class="form-group col-md-8">
+        </div>
+        <div class="form-group col-md-2">
+            <input type="submit" value="حفظ" class="btn btn-primary w-100" />
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+ *@

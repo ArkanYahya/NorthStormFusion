@@ -1,0 +1,14 @@
+﻿@model NorthStorm.Models.Comptence
+
+<li>
+    @Model.Name
+    @if (Model.ChildComptences != null && Model.ChildComptences.Any())
+    {
+        <ul>
+            @foreach (var childComptence in Model.ChildComptences)
+            {
+                @Html.Partial("_ComptenceTree", childComptence)
+            }
+        </ul>
+    }
+</li>
