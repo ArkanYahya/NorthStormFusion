@@ -241,6 +241,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\HRDivision\HRDepartment\StaffingSection\" />
+    <Folder Include="mydata\" />
   </ItemGroup>
 
 </Project>
